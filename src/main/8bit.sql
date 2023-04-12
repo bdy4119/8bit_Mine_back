@@ -71,3 +71,13 @@ create table main (
 );
 
 -- -------------------다연 ------------------------------------------------------------------------------------
+
+-- mine 이미지와 텍스트 저장
+create table mine_mine(
+    seq int auto_increment primary key,
+    id varchar(50) not null, 
+    pagenumber int not null,
+    position int not null,
+    imgurl varchar(300) not null,
+    imgtext varchar(500) not null
+);
