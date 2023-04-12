@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.dao.MemberDao">
+
+<select id="allmember" resultType="mul.cam.a.dto.MemberDto">
+	select * from member
+</select>
+
+<select id="idcheck" parameterType="String" resultType="String">
+	select id
+	from member
+	where id=#{id}
+</select>
+
+<insert id="addmember" parameterType="mul.cam.a.dto.MemberDto">
+	insert into member(id, pwd, name, email, auth, filename, newfilename)
+	values(#{id}, #{pwd}, #{name}, #{email}, 3, "empty", "empty")
+</insert>
+
+<select id="login" parameterType="mul.cam.a.dto.MemberDto" resultType="mul.cam.a.dto.MemberDto">
+	select id, pwd, name, email, auth
+	from member
+	where id=#{id} and pwd=#{pwd}
+</select>
+
+</mapper>

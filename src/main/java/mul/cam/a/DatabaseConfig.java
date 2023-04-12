@@ -2,6 +2,8 @@ package mul.cam.a;
 
 import javax.sql.DataSource;
 
+import java.io.IOException;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,7 +18,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@PropertySource("classpath:/application.properties")
+@PropertySource("classpath:application.properties")
 public class DatabaseConfig {
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource.hikari")
