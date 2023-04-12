@@ -81,3 +81,48 @@ create table mine_mine(
     imgurl varchar(300) not null,
     imgtext varchar(500) not null
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- -------------------인서 ------------------------------------------------------------------------------------
+
+create table user(
+id varchar(20) primary key,
+pwd varchar(50) not null,
+name varchar(50) not null,
+email varchar(100) not null,
+phone varchar(12) not null,
+regi_date timestamp not null,
+user_auth int default 1,
+user_state varchar(100),
+cause varchar(100),
+mail_auth int default 0,
+mail_key varchar(50),
+imagefilename varchar(50) default "profileimage.jpg",
+newimagefilename varchar(50) default "profileimage.jpg"
+);
+
+create table report(
+seq int primary key auto_increment
+informant varchar(20) not null,
+suspect varchar(20) not null,
+report_cause varchar(100) not null,
+report_content varchar(50) not null,
+result varchar(50) default "choose",
+report_date timestamp not null,
+report_state varchar(50) default "checking"
+);
+
+-- -------------------인서 ------------------------------------------------------------------------------------
