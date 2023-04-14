@@ -4,13 +4,13 @@
 <mapper namespace="mul.cam.a.dao.MeDao">
 	
 	<!-- 캘린더 리스트 불러오기 -->
-	<select id="getCalList" parameterType="mul.cam.a.dto.CalendarDto" resultType="mul.cam.a.dto.CalendarDto">
+	<!-- <select id="getCalList" parameterType="mul.cam.a.dto.CalendarDto" resultType="mul.cam.a.dto.CalendarDto">
 		select seq, id, title, content, rdate, wdate
 		from (select row_number()over(partition by substr(rdate, 1, 8) order by rdate asc) as rnum, 
 					seq, id, title, content, rdate, wdate 
 			  from calendar
 			  where id=? and substr(rdate, 1, 6)=?
-			  <!-- where 1=1
+			  where 1=1
 			 <if test="choice != null and choice != '' and search != null and search != '' ">
 			 	<if test="choice == 'title'">
 			 		and title like concat('%', #{search}, '%') and del=0
@@ -19,8 +19,32 @@
 			 		and content like concat('%', #{search}, '%') and del=0
 			 	</if>
 			 </if>		 
-			 order by rdate desc -->) a
+			 order by rdate desc) a
 		where rnum between 1 and 5
+	</select> -->
+	
+	
+	
+	<!-- todo리스트 불러오기 -->
+	<select id="getTodoList" parameterType="mul.cam.a.dto.TodoDto"
+		resultType="mul.cam.a.dto.TodoDto">
+
+		select seq, id, title, content, rdate, wdate, del
+		from
+			(select row_number()over(order by rdate desc) as rnum,
+				seq, id, title, content, rdate, wdate, del
+			 from todo
+			 where 1=1 
+			 <!-- <if test="choice != null and choice != '' and search != null and search != '' ">
+			 	<if test="choice == 'title'">
+			 		and title like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 	<if test="choice == 'content'">
+			 		and content like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 </if>	 -->	 
+			 order by rdate desc) a
+		<!-- where rnum between ${start} and ${end} -->
 	</select>
 	
 </mapper>
