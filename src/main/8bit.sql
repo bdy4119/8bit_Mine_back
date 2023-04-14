@@ -71,7 +71,8 @@ create table calendar(
 	title varchar(200) not null,
 	content varchar(4000),
 	rdate varchar(12) not null,
-	wdate timestamp not null
+	wdate timestamp not null,
+	del decimal(1) not null
 );
 -- id참조
 alter table calender
