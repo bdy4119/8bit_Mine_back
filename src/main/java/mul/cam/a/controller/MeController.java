@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import mul.cam.a.dao.MeDao;
-import mul.cam.a.dto.CalendarDto;
 import mul.cam.a.dto.DiaryDto;
 import mul.cam.a.dto.MeParam;
 import mul.cam.a.dto.MemberDto;
@@ -26,19 +25,7 @@ import mul.cam.a.service.MemberService;
 public class MeController {
 	@Autowired
 	MeService service;
-	
-	
-	@GetMapping(value = "calList")
-	public String calList(Model model) {
-		System.out.println("MeController getCalList " + new Date());
-		
-		List<CalendarDto> list = service.getCalList();
-		
-		model.addAttribute("calList", list);
-		
-		return "calList";
-	}
-	
+
 	
 	//todo리스트 불러오기
 	@GetMapping(value = "todoList")
@@ -54,6 +41,19 @@ public class MeController {
 		
 		
 		return map;		
+	}
+	
+	
+	//diary글쓰기
+	@PostMapping(value="todoWrite")
+	public String writeTodo(TodoDto dto) {
+		System.out.println("MeController writeTodo " + new Date());
+		
+		boolean b = service.writeTodo(dto);
+		if(b == false) {
+			return "NO";
+		}
+		return "YES";
 	}
 	
 	

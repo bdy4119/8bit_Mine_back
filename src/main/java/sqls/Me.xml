@@ -25,6 +25,13 @@
 		<!-- where rnum between ${start} and ${end} -->
 	</select>
 	
+	<!-- todowrite -->
+	<insert id="writeTodo" parameterType="mul.cam.a.dto.TodoDto">
+		insert into todo(id, title, content, rdate, wdate, del)
+		values(#{id}, #{title}, #{content}, #{rdate} ,now(), 0)	
+	</insert>
+	
+	
 	
 	
 	

@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mul.cam.a.dao.MeDao;
 import mul.cam.a.dao.MemberDao;
-import mul.cam.a.dto.CalendarDto;
 import mul.cam.a.dto.DiaryDto;
 import mul.cam.a.dto.MeParam;
 import mul.cam.a.dto.MemberDto;
@@ -20,12 +19,13 @@ public class MeService {
 	@Autowired
 	MeDao dao;
 	
-	public List<CalendarDto> getCalList() {
-		return dao.getCalList();
-	}
-	
 	public List<TodoDto> getTodoList() {
 		return dao.getTodoList();
+	}
+	
+	public boolean writeTodo(TodoDto dto) {
+		int n = dao.writeTodo(dto);
+		return n>0?true:false;
 	}
 	
 	public List<DiaryDto> getDiaryList(MeParam param) {
