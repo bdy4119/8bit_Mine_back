@@ -2,8 +2,8 @@ package mul.cam.a.dto;
 
 import java.io.Serializable;
 
-public class TodoDto implements Serializable{
-	
+public class DiaryDto implements Serializable{
+
 	private int seq;		// sequence 글번호
 	private String id;		// 작성자
 	
@@ -14,19 +14,21 @@ public class TodoDto implements Serializable{
 	
 	private int del;
 	
-	public TodoDto() {
+	public DiaryDto() {
 		
 	}
 	
-	public TodoDto(String id, String title, String content, String rdate) {
+	//외부에서 받는 값 생성자
+	public DiaryDto(String id, String title, String content, String rdate) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.rdate = rdate;
 	}
+	
 
-	public TodoDto(int seq, String id, String title, String content, String rdate, String wdate, int del) {
+	public DiaryDto(int seq, String id, String title, String content, String rdate, String wdate, int del) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -95,12 +97,12 @@ public class TodoDto implements Serializable{
 
 	@Override
 	public String toString() {
-		return "TodoDto [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", rdate=" + rdate
+		return "DiaryDto [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", rdate=" + rdate
 				+ ", wdate=" + wdate + ", del=" + del + "]";
 	}
 	
 	
 	
 	
-
+	
 }
