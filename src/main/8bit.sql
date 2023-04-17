@@ -184,3 +184,21 @@ report_state varchar(50) default "checking"
 );
 
 -- -------------------인서 ------------------------------------------------------------------------------------
+
+------------------------------------------준----------------------------------------------------------------
+CREATE TABLE MINE_I(
+		SEQ INT AUTO_INCREMENT PRIMARY KEY,
+        ID VARCHAR(20) NOT NULL,
+        CLASSIFY VARCHAR(30) NOT NULL,
+        ITEM VARCHAR(50),
+        DETAIL VARCHAR(50),
+		REF INT
+);
+
+CREATE TABLE MINE_CLASSI(
+		SEQ INT AUTO_INCREMENT PRIMARY KEY,
+        ID VARCHAR(20) NOT NULL,
+        CLASSIFY VARCHAR(30) NOT NULL,
+        REF INT
+);
+-----------------------------------------------------------------------------------------------------------
