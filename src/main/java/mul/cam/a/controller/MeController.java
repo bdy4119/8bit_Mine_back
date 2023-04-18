@@ -29,22 +29,32 @@ public class MeController {
 	
 	//todo리스트 불러오기
 	@GetMapping(value = "todoList")
-	public Map<String, Object> getTodoList() {
+	public Map<String, Object> getTodoList(MeParam param) {
 		System.out.println("MeController getTodoList " + new Date());
 
+		// 글의 시작과 끝
+		int pn = param.getPageNumber();  // 0 1 2 3 4
+		int start = 1 + (pn * 10);	// 1  11
+		int end = (pn + 1) * 10;	// 10 20 
+				
+		param.setStart(start);
+		param.setEnd(end);
+		
 		List<TodoDto> list = service.getTodoList();
+		int len = service.getAllDiary(param);
 		
 	//	System.out.println(list);
 		
 		Map<String,Object> map = new HashMap<>();
 		map.put("list", list);
+		map.put("cnt", len); // 페이지수x -> 글의 총수
 		
 		
 		return map;		
 	}
 	
 	
-	//diary글쓰기
+	//todo글쓰기
 	@PostMapping(value="todoWrite")
 	public String writeTodo(TodoDto dto) {
 		System.out.println("MeController writeTodo " + new Date());
@@ -56,6 +66,27 @@ public class MeController {
 		return "YES";
 	}
 	
+	
+	//Todo수정
+	@PostMapping(value="TodoUpdate")
+	public String updateTodo(TodoDto dto) {
+		System.out.println("MeController updateTodo " + new Date());
+		
+		boolean b = service.updateTodo(dto);
+		if(b == false) {
+			return "NO";
+		}
+		return "YES";
+	}
+	
+	
+	//todo삭제
+	@GetMapping(value="deleteTodo")
+	public void deleteTodo(int seq) {
+		System.out.println("MeController deleteTodo " + new Date());
+		
+		service.deleteTodo(seq);
+	}
 	
 	
 	//diary리스트 불러오기
@@ -96,6 +127,28 @@ public class MeController {
 			return "NO";
 		}
 		return "YES";
+	}
+	
+	
+	//diary수정
+	@PostMapping(value="diaryUpdate")
+	public String updateDiary(DiaryDto dto) {
+		System.out.println("MeController updateDiary " + new Date());
+		
+		boolean b = service.updateDiary(dto);
+		if(b == false) {
+			return "NO";
+		}
+		return "YES";
+	}
+	
+	
+	//diary삭제
+	@GetMapping(value="deleteDiary")
+	public void deleteDiary(int seq) {
+		System.out.println("MeController deleteDiary " + new Date());
+		
+		service.deleteDiary(seq);
 	}
 	
 	

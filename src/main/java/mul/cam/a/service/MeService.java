@@ -23,9 +23,22 @@ public class MeService {
 		return dao.getTodoList();
 	}
 	
+	public int getAllTodo(MeParam param) {
+		return dao.getAllTodo(param);
+	}
+	
 	public boolean writeTodo(TodoDto dto) {
 		int n = dao.writeTodo(dto);
 		return n>0?true:false;
+	}
+	
+	public boolean updateTodo(TodoDto dto) {
+		int n = dao.updateTodo(dto);
+		return n>0?true:false;
+	}
+	
+	public void deleteTodo(int seq) {
+		dao.deleteTodo(seq);
 	}
 	
 	public List<DiaryDto> getDiaryList(MeParam param) {
@@ -41,6 +54,14 @@ public class MeService {
 		return n>0?true:false;
 	}
 	
+	public boolean updateDiary(DiaryDto dto) {
+		int n = dao.updateDiary(dto);
+		return n>0?true:false;
+	}
+	
+	public void deleteDiary(int seq) {
+		dao.deleteDiary(seq);
+	}
 	
 }
 

@@ -4,7 +4,7 @@
 <mapper namespace="mul.cam.a.dao.MeDao">
 
 	<!-- todo리스트 불러오기 -->
-	<select id="getTodoList" parameterType="mul.cam.a.dto.TodoDto"
+	<select id="getTodoList" parameterType="mul.cam.a.dto.MeParam"
 		resultType="mul.cam.a.dto.TodoDto">
 
 		select seq, id, title, content, rdate, wdate, del
@@ -30,6 +30,39 @@
 		insert into todo(id, title, content, rdate, wdate, del)
 		values(#{id}, #{title}, #{content}, #{rdate} ,now(), 0)	
 	</insert>
+	
+	<!-- todo update -->
+	<update id="updateTodo" parameterType="mul.cam.a.dto.TodoDto">
+		update todo
+		set title=#{title}, content=#{content}, rdate=#{rdate}
+		where seq=#{seq}
+	</update>
+	
+	<!-- todo delete -->
+	<update id="deleteTodo">
+		delete from todo
+		where seq=#{seq}
+	</update>
+	
+	
+	<!-- todo 글의 총수 -->
+	<select id="getAllTodo" parameterType="mul.cam.a.dto.MeParam" resultType="java.lang.Integer">	
+		select ifnull(count(*), 0)
+		from todo
+		<if test="choice != null and choice != '' and search != null and search != '' ">
+		 	<if test="choice == 'title'">
+		 		where title like concat('%', #{search}, '%') and del=0
+		 	</if>
+		 	<if test="choice == 'content'">
+		 		where content like concat('%', #{search}, '%') and del=0
+		 	</if>
+		 	<if test="choice == 'writer'">
+		 		where id=#{search} and del=0
+		 	</if>
+		 </if>
+	</select>
+	
+	
 	
 	
 	
@@ -61,7 +94,6 @@
 	
 	<!-- diary 글의 총수 -->
 	<select id="getAllDiary" parameterType="mul.cam.a.dto.MeParam" resultType="java.lang.Integer">
-		
 		select ifnull(count(*), 0)
 		from calendar
 		<if test="choice != null and choice != '' and search != null and search != '' ">
@@ -83,7 +115,18 @@
 		values(#{id}, #{title}, #{content}, #{rdate} ,now(), 0)	
 	</insert>
 	
+	<!-- diary update -->
+	<update id="updateDiary" parameterType="mul.cam.a.dto.DiaryDto">
+		update calendar
+		set title=#{title}, content=#{content}, rdate=#{rdate}
+		where seq=#{seq}
+	</update>
 	
+	<!-- diary delete -->
+	<update id="deleteDiary">
+		delete from calendar
+		where seq=#{seq}
+	</update>
 	
 	
 </mapper>
