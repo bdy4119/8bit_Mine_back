@@ -18,6 +18,7 @@ import mul.cam.a.dto.DiaryDto;
 import mul.cam.a.dto.MeParam;
 import mul.cam.a.dto.MemberDto;
 import mul.cam.a.dto.TodoDto;
+import mul.cam.a.dto.TodoParam;
 import mul.cam.a.service.MeService;
 import mul.cam.a.service.MemberService;
 
@@ -29,28 +30,28 @@ public class MeController {
 	
 	//todo리스트 불러오기
 	@GetMapping(value = "todoList")
-	public Map<String, Object> getTodoList(MeParam param) {
+	public Map<String, Object> getTodoList(TodoParam param) {
 		System.out.println("MeController getTodoList " + new Date());
 
 		// 글의 시작과 끝
-		int pn = param.getPageNumber();  // 0 1 2 3 4
-		int start = 1 + (pn * 10);	// 1  11
-		int end = (pn + 1) * 10;	// 10 20 
+				int pn = param.getPageNumber();  // 0 1 2 3 4
+				int start = 1 + (pn * 10);	// 1  11
+				int end = (pn + 1) * 10;	// 10 20 
 				
-		param.setStart(start);
-		param.setEnd(end);
-		
-		List<TodoDto> list = service.getTodoList();
-		int len = service.getAllDiary(param);
-		
-	//	System.out.println(list);
-		
-		Map<String,Object> map = new HashMap<>();
-		map.put("list", list);
-		map.put("cnt", len); // 페이지수x -> 글의 총수
-		
-		
-		return map;		
+				param.setStart(start);
+				param.setEnd(end);
+				
+				List<TodoDto> list = service.getTodoList(param);
+				int len = service.getAllTodo(param);
+				
+				System.out.println(list);
+			//	System.out.println(len);
+				
+				Map<String,Object> map = new HashMap<>();
+				map.put("list", list);
+				map.put("cnt", len); // 페이지수x -> 글의 총수
+				
+				return map;		
 	}
 	
 	
@@ -105,8 +106,35 @@ public class MeController {
 		List<DiaryDto> list = service.getDiaryList(param);
 		int len = service.getAllDiary(param);
 		
-		System.out.println(list);
-		System.out.println(len);
+	//	System.out.println(list);
+	//	System.out.println(len);
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("cnt", len); // 페이지수x -> 글의 총수
+		
+		return map;		
+	}
+	
+	
+	//diary리스트 전체 불러오기 -> 달력 뿌릴용
+	@GetMapping(value = "diaryCalList")
+	public Map<String, Object> getDiaryCalList(MeParam param) {
+		System.out.println("MeController getDiaryList " + new Date());
+		
+		// 글의 시작과 끝
+		int pn = param.getPageNumber();  // 0 1 2 3 4
+		int start = 1 + (pn * 10);	// 1  11
+		int end = (pn + 1) * 10;	// 10 20 
+		
+		param.setStart(start);
+		param.setEnd(end);
+		
+		List<DiaryDto> list = service.getDiaryCalList(param);
+		int len = service.getAllDiary(param);
+		
+		//	System.out.println(list);
+		//	System.out.println(len);
 		
 		Map<String,Object> map = new HashMap<>();
 		map.put("list", list);

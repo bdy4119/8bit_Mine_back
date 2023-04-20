@@ -4,7 +4,7 @@
 <mapper namespace="mul.cam.a.dao.MeDao">
 
 	<!-- todo리스트 불러오기 -->
-	<select id="getTodoList" parameterType="mul.cam.a.dto.MeParam"
+	<select id="getTodoList" parameterType="mul.cam.a.dto.TodoParam"
 		resultType="mul.cam.a.dto.TodoDto">
 
 		select seq, id, title, content, rdate, wdate, del
@@ -13,17 +13,18 @@
 				seq, id, title, content, rdate, wdate, del
 			 from todo
 			 where 1=1 
-			 <!-- <if test="choice != null and choice != '' and search != null and search != '' ">
+			<!-- <if test="choice != null and choice != '' and search != null and search != '' ">
 			 	<if test="choice == 'title'">
 			 		and title like concat('%', #{search}, '%') and del=0
 			 	</if>
 			 	<if test="choice == 'content'">
 			 		and content like concat('%', #{search}, '%') and del=0
 			 	</if>
-			 </if>	 -->	 
+			 </if>	  -->
 			 order by rdate desc) a
-		<!-- where rnum between ${start} and ${end} -->
+		<!-- where rnum between ${start} and ${end}-->
 	</select>
+	
 	
 	<!-- todowrite -->
 	<insert id="writeTodo" parameterType="mul.cam.a.dto.TodoDto">
@@ -46,7 +47,7 @@
 	
 	
 	<!-- todo 글의 총수 -->
-	<select id="getAllTodo" parameterType="mul.cam.a.dto.MeParam" resultType="java.lang.Integer">	
+	<select id="getAllTodo" parameterType="mul.cam.a.dto.TodoParam" resultType="java.lang.Integer">	
 		select ifnull(count(*), 0)
 		from todo
 		<if test="choice != null and choice != '' and search != null and search != '' ">
@@ -87,8 +88,9 @@
 			 		and content like concat('%', #{search}, '%') and del=0
 			 	</if>
 			 </if>	 
-			 order by rdate desc) a
-		where rnum between ${start} and ${end}
+			  order by rdate asc ) a
+			  where rnum between ${start} and ${end}
+				and rdate = DATE_FORMAT(CURDATE(), "%Y-%m-%d")
 	</select>
 	
 	
@@ -127,6 +129,31 @@
 		delete from calendar
 		where seq=#{seq}
 	</update>
+	
+	
+	
+	
+	<!-- calendar전체리스트 불러오기 -> 달력 뿌릴용-->
+	<select id="getDiaryCalList" parameterType="mul.cam.a.dto.MeParam"
+		resultType="mul.cam.a.dto.DiaryDto">
+
+		select seq, id, title, content, rdate, wdate, del
+		from
+			(select row_number()over(order by rdate desc) as rnum,
+				seq, id, title, content, rdate, wdate, del
+			 from calendar
+			 where 1=1 
+			 <if test="choice != null and choice != '' and search != null and search != '' ">
+			 	<if test="choice == 'title'">
+			 		and title like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 	<if test="choice == 'content'">
+			 		and content like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 </if>	 
+			  order by rdate asc ) a
+			  where rnum between ${start} and ${end}
+	</select>
 	
 	
 </mapper>

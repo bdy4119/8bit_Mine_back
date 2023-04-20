@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 import mul.cam.a.dto.DiaryDto;
 import mul.cam.a.dto.MeParam;
 import mul.cam.a.dto.TodoDto;
+import mul.cam.a.dto.TodoParam;
 
 @Mapper
 @Repository
 public interface MeDao {
 	//todo리스트
-	List<TodoDto> getTodoList();
+	List<TodoDto> getTodoList(TodoParam param);
 	
 	//todo 글쓰기
 	int writeTodo(TodoDto dto);
@@ -25,9 +26,11 @@ public interface MeDao {
 	public void deleteTodo(int seq);
 	
 	//todo글의 총수
-	int getAllTodo(MeParam param);
+	int getAllTodo(TodoParam param);
 	
-	//diary리스트
+	
+	
+	//diary리스트 -> 오늘이랑 같은 날짜만 보내주기
 	List<DiaryDto> getDiaryList(MeParam param);
 
 	//diary 글쓰기
@@ -42,4 +45,6 @@ public interface MeDao {
 	//diary글의 총수
 	int getAllDiary(MeParam param);
 
+	//diary리스트 -> 전체 보내주기(달력 뿌릴용)
+	List<DiaryDto> getDiaryCalList(MeParam param);
 }

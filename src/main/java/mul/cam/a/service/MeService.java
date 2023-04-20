@@ -7,11 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mul.cam.a.dao.MeDao;
-import mul.cam.a.dao.MemberDao;
 import mul.cam.a.dto.DiaryDto;
 import mul.cam.a.dto.MeParam;
-import mul.cam.a.dto.MemberDto;
 import mul.cam.a.dto.TodoDto;
+import mul.cam.a.dto.TodoParam;
 
 @Service
 @Transactional
@@ -19,11 +18,11 @@ public class MeService {
 	@Autowired
 	MeDao dao;
 	
-	public List<TodoDto> getTodoList() {
-		return dao.getTodoList();
+	public List<TodoDto> getTodoList(TodoParam param) {
+		return dao.getTodoList(param);
 	}
 	
-	public int getAllTodo(MeParam param) {
+	public int getAllTodo(TodoParam param) {
 		return dao.getAllTodo(param);
 	}
 	
@@ -61,6 +60,12 @@ public class MeService {
 	
 	public void deleteDiary(int seq) {
 		dao.deleteDiary(seq);
+	}
+	
+	
+	//전체 보내주기 -> 달력 뿌릴용
+	public List<DiaryDto> getDiaryCalList(MeParam param) {
+		return dao.getDiaryCalList(param);
 	}
 	
 }
