@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.dao.BusinessDao">
+	<select id="businesscard" parameterType="mul.cam.a.dto.BusinessDto"
+										resultType="mul.cam.a.dto.BusinessDto">
+		select seq, id, name, email, url, historydate, wdate, content, thumbnail, phoneNum, introduce
+		from businesscard
+	</select>
+	
+	<!-- businesswrite -->
+	<insert id="writeBusiness" parameterType="mul.cam.a.dto.BusinessDto">
+		insert into businesscard(id, title, content, rdate, wdate, del)
+		values(#{id}, #{title}, #{content}, #{rdate} ,now(), 0)	
+	</insert>
+	
+	<!-- business update -->
+	<update id="updateBusiness" parameterType="mul.cam.a.dto.BusinessDto">
+		update businesscard
+		set name=#{name}, email=#{email}, url=#{url},
+			thumbnail=#{thumbnail}, phoneNum=#{phoneNum}, introduce=#{introduce}
+		where id=#{id}
+	</update>
+	
+	<!-- business delete -->
+	<update id="deleteBusiness">
+		delete from businesscard
+		where seq=#{seq}
+	</update>
+</mapper>

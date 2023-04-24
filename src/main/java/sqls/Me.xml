@@ -90,7 +90,7 @@
 			 </if>	 
 			  order by rdate asc ) a
 			  where rnum between ${start} and ${end}
-				and rdate = DATE_FORMAT(CURDATE(), "%Y-%m-%d")
+<!-- 				and rdate = DATE_FORMAT(CURDATE(), "%Y-%m-%d") -->
 	</select>
 	
 	
