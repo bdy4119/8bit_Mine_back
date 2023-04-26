@@ -2,12 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mul.cam.a.dao.BusinessDao">
+
 	<select id="businesscard" parameterType="mul.cam.a.dto.BusinessDto"
 										resultType="mul.cam.a.dto.BusinessDto">
-		select seq, id, name, email, url, historydate, wdate, content, thumbnail, phoneNum, introduce
+		select seq, id, name, email, url, wdate, thumbnail, phoneNum, introduce
 		from businesscard
 	</select>
 	
+	<!-- 명함 상세보기 -->
+	<select id="businessDetail" parameterType="String"
+										resultType="mul.cam.a.dto.BusinessDto">
+		select seq, id, name, email, url, wdate, thumbnail, phoneNum, introduce
+		from businesscard
+		where id=#{id}
+	</select>
+
 	<!-- businesswrite -->
 	<insert id="writeBusiness" parameterType="mul.cam.a.dto.BusinessDto">
 		insert into businesscard(id, title, content, rdate, wdate, del)
@@ -27,4 +36,41 @@
 		delete from businesscard
 		where seq=#{seq}
 	</update>
+	
+	
+	
+	
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 명함 뒷면 start ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<select id="businesscardB" parameterType="mul.cam.a.dto.BusinessBackDto"
+										resultType="mul.cam.a.dto.BusinessBackDto">
+		select seq, id, historyDate, historyTitle, historyContent, historyUrl, wdate
+		from businesscardBack
+		order by historyDate desc
+	</select>
+	
+	<!-- delete -->
+	<update id="backDel">
+		delete from businesscardBack
+		where seq=#{seq}
+	</update>
+	
+	
+	<!-- update -->
+	<update id="backUpdate" parameterType="mul.cam.a.dto.BusinessBackDto">
+		update businesscardBack
+		set id=#{id}, historyDate=#{historyDate}, historyTitle=#{historyTitle},
+			historyContent=#{historyContent}, historyUrl=#{historyUrl}
+		where seq=#{seq}
+	</update>
+	
+	<!-- 상세보기 -->
+	<select id="backDetail" parameterType="Integer"
+										resultType="mul.cam.a.dto.BusinessBackDto">
+		select *
+		from businesscardBack
+		where seq=#{seq}
+	</select>
+	
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 명함 뒷면 end ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	
 </mapper>
