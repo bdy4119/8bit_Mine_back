@@ -26,8 +26,6 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import mul.cam.a.dto.BusinessBackDto;
 import mul.cam.a.dto.BusinessDto;
-import mul.cam.a.dto.CharacterDto;
-import mul.cam.a.dto.CharacterMainDto;
 import mul.cam.a.service.BusinessService;
 
 @RestController
@@ -150,58 +148,7 @@ public class BusinessController {
 	}
 	
 	
-	
-	
-	
-	/* 캐릭터 start-------------------------------------------------*/
-	@GetMapping(value = "default")
-	public Map<String, Object> getdefault(CharacterDto dto) {
-		System.out.println("BusinessController getdefault " + new Date());
-		
-		List<CharacterDto> list = service.charDefault(dto);
-		System.out.println(list);
-		
-		Map<String,Object> map = new HashMap<>();
-		map.put("list", list);
-		
-		return map;
-	}
-	
-	
-	@GetMapping(value = "hair")
-	public Map<String, Object> gethair(CharacterDto dto) {
-		System.out.println("BusinessController gethair " + new Date());
-		
-		List<CharacterDto> list = service.hair(dto);
-		System.out.println(list);
-		
-		Map<String,Object> map = new HashMap<>();
-		map.put("list", list);
-		
-		return map;
-	}
-	
-	
-	@GetMapping(value = "main")
-	public Map<String, Object> getMain(CharacterMainDto dto) {
-		System.out.println("BusinessController getMain " + new Date());
-		
-		List<CharacterMainDto> list = service.main(dto);
-		System.out.println(list);
-		
-		Map<String,Object> map = new HashMap<>();
-		map.put("list", list);
-		
-		return map;
-	}
-		
-	//명함 디테일
-	@GetMapping(value="mainDetail")
-	public CharacterMainDto mainDetail(int seq) {
-		System.out.println("BusinessController mainDetail " + new Date());
-		
-		return service.mainDetail(seq);
-	}
+
 	
 	
 	

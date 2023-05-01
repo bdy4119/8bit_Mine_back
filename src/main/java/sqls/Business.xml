@@ -80,39 +80,4 @@
 		values(#{id}, #{historyDate}, #{historyTitle}, #{historyContent}, #{historyUrl}, now())
 	</insert>
 	
-	
-	
-	
-	
-	
-	
-	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 캐릭터 커스텀 start ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-	
-	<select id="charDefault" parameterType="mul.cam.a.dto.CharacterDto"
-										resultType="mul.cam.a.dto.CharacterDto">
-		select seq, thumbnail
-		from charDefault
-	</select>
-
-	<select id="hair" parameterType="mul.cam.a.dto.CharacterDto"
-										resultType="mul.cam.a.dto.CharacterDto">
-		select seq, thumbnail
-		from hair
-	</select>
-	
-	
-	<select id="main" parameterType="mul.cam.a.dto.CharacterMainDto"
-										resultType="mul.cam.a.dto.CharacterMainDto">
-		select seq, hair, eyes, nose, eyebrow, mouth
-		from main
-	</select>
-	
-	<!-- 상세보기 -->
-	<select id="mainDetail" parameterType="Integer"
-								resultType="mul.cam.a.dto.CharacterMainDto">
-		select *
-		from main
-		where seq=#{seq}
-	</select>
-	
 </mapper>
