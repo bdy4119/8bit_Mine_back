@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import mul.cam.a.dto.BusinessBackDto;
 import mul.cam.a.dto.BusinessDto;
+import mul.cam.a.dto.CharacterDto;
+import mul.cam.a.dto.CharacterMainDto;
 import mul.cam.a.dto.TodoDto;
 
 @Mapper
@@ -28,7 +30,6 @@ public interface BusinessDao {
 		
 	//삭제
 	public void deleteBusiness(int seq);
-	/* 명함 앞면 end */
 	
 	
 	
@@ -45,4 +46,21 @@ public interface BusinessDao {
 	
 	//상세보기
 	BusinessBackDto backDetail(int seq);
+	
+	//글쓰기
+	int backWrite(BusinessBackDto dto);
+
+
+	
+	/* 캐릭터 */
+	List<CharacterDto> charDefault(CharacterDto dto);
+	
+	List<CharacterDto> hair(CharacterDto dto);
+	
+	List<CharacterMainDto> main(CharacterMainDto dto); //전체
+	
+	//상세보기
+	CharacterMainDto mainDetail(int seq);
+	
+	
 }

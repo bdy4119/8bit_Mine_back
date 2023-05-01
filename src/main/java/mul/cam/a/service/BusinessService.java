@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import mul.cam.a.dao.BusinessDao;
 import mul.cam.a.dto.BusinessBackDto;
 import mul.cam.a.dto.BusinessDto;
+import mul.cam.a.dto.CharacterDto;
+import mul.cam.a.dto.CharacterMainDto;
 
 @Service
 @Transactional
@@ -62,6 +64,32 @@ public class BusinessService {
 	//상세보기
 	public BusinessBackDto backDetail(int seq) {
 		return dao.backDetail(seq);
+	}
+	
+	public boolean backWrite(BusinessBackDto dto) {
+		int n = dao.backWrite(dto);
+		return n>0?true:false;
+	}
+	
+	
+	
+	
+	/* 캐릭터 */
+	public List<CharacterDto> charDefault(CharacterDto dto) {
+		return dao.charDefault(dto);
+	}
+	
+	public List<CharacterDto> hair(CharacterDto dto) {
+		return dao.hair(dto);
+	}
+	
+	public List<CharacterMainDto> main(CharacterMainDto dto) {
+		return dao.main(dto);
+	}
+	
+	//상세보기
+	public CharacterMainDto mainDetail(int seq) {
+		return dao.mainDetail(seq);
 	}
 	
 	
