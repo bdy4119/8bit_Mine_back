@@ -200,7 +200,7 @@ public class APIS {
 	// TMDB Search(Movie, Drama)
 	public static Map tmdb(String kind, String query, int page) throws Exception {
 
-		String api_key = "TMDB API KEY";
+		String api_key = "TMDB Key";
 		String api_url = "";
 
 		if(kind.equals("movie")) {
