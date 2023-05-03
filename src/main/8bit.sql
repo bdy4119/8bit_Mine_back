@@ -97,14 +97,19 @@ create table mine_mine(
 -- -------------------인서 ------------------------------------------------------------------------------------
 
 create table user(
-	email varchar(100) primary key,
-	name varchar(50) not null,
-	regidate timestamp not null,
-	id varchar(50),
-	social varchar(50),
-	auth int,
-	cause varchar(100),
-	token varchar(200)
+id varchar(20) primary key,
+pwd varchar(50) not null,
+name varchar(50) not null,
+email varchar(100) not null,
+phone varchar(12) not null,
+regi_date timestamp not null,
+user_auth int default 1,
+user_state varchar(100),
+cause varchar(100),
+mail_auth int default 0,
+mail_key varchar(50),
+imagefilename varchar(50) default "profileimage.jpg",
+newimagefilename varchar(50) default "profileimage.jpg"
 );
 
 create table report(
@@ -122,18 +127,54 @@ report_state varchar(50) default "checking"
 
 ------------------------------------------준----------------------------------------------------------------
 CREATE TABLE MINE_I(
-		SEQ INT AUTO_INCREMENT PRIMARY KEY,
-        ID VARCHAR(20) NOT NULL,
-        CLASSIFY VARCHAR(30) NOT NULL,
-        ITEM VARCHAR(50),
-        DETAIL VARCHAR(50),
-		REF INT
+SEQ INT AUTO_INCREMENT PRIMARY KEY,
+ID VARCHAR(20) NOT NULL,
+CLASSIFY VARCHAR(30) NOT NULL,
+ITEM VARCHAR(50),
+DETAIL VARCHAR(50),
+REF INT
+);
+
+CREATE TABLE BGM(
+SEQ INT AUTO_INCREMENT PRIMARY KEY,
+ID VARCHAR(20),
+ARTIST VARCHAR(30),
+TITLE VARCHAR(30),
+URL VARCHAR(50)
 );
 
 CREATE TABLE MINE_CLASSI(
-		SEQ INT AUTO_INCREMENT PRIMARY KEY,
-        ID VARCHAR(20) NOT NULL,
-        CLASSIFY VARCHAR(30) NOT NULL,
-        REF INT
+SEQ INT AUTO_INCREMENT PRIMARY KEY,
+ID VARCHAR(20) NOT NULL,
+CLASSIFY VARCHAR(30) NOT NULL,
+REF INT
 );
+
+CREATE TABLE MINE_10QNA(
+ID VARCHAR(20) PRIMARY KEY,
+Q1 VARCHAR(100),
+Q2 VARCHAR(100),
+Q3 VARCHAR(100),
+Q4 VARCHAR(100),
+Q5 VARCHAR(100),
+Q6 VARCHAR(100),
+Q7 VARCHAR(100),
+Q8 VARCHAR(100),
+Q9 VARCHAR(100),
+Q10 VARCHAR(100)
+);
+
+CREATE TABLE GUESTBOOK(
+SEQ INT AUTO_INCREMENT PRIMARY KEY,
+TOID VARCHAR(20),
+FROMID VARCHAR(20),
+COMMENT VARCHAR(50),
+REF INT,
+STEP INT,
+ISVOICE INT,
+FILENAME VARCHAR(30),
+REGDATE TIMESTAMP
+);
+
+
 -----------------------------------------------------------------------------------------------------------
