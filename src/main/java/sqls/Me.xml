@@ -39,6 +39,13 @@
 		where seq=#{seq}
 	</update>
 	
+	<!-- todo del update(체크 여부) -->
+	<update id="updateCheck" parameterType="mul.cam.a.dto.TodoDto">
+		update todo
+		set del=#{del}
+		where seq=#{seq}
+	</update>
+	
 	<!-- todo delete -->
 	<update id="deleteTodo">
 		delete from todo

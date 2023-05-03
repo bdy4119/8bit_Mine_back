@@ -22,6 +22,9 @@ public interface MeDao {
 	//todo 수정
 	int updateTodo(TodoDto dto);
 	
+	//todo 수정
+	int updateCheck(TodoDto dto);
+	
 	//todo 삭제
 	public void deleteTodo(int seq);
 	

@@ -36,6 +36,11 @@ public class MeService {
 		return n>0?true:false;
 	}
 	
+	public boolean updateCheck(TodoDto dto) {
+		int n = dao.updateCheck(dto);
+		return n>0?true:false;
+	}
+	
 	public void deleteTodo(int seq) {
 		dao.deleteTodo(seq);
 	}

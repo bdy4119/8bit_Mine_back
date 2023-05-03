@@ -81,6 +81,19 @@ public class MeController {
 	}
 	
 	
+	//Todo check수정
+	@PostMapping(value="updateCheck")
+	public String updateCheck(TodoDto dto) {
+		System.out.println("MeController updateCheck " + new Date());
+		
+		boolean b = service.updateCheck(dto);
+		if(b == false) {
+			return "NO";
+		}
+		return "YES";
+	}
+	
+	
 	//todo삭제
 	@GetMapping(value="deleteTodo")
 	public void deleteTodo(int seq) {

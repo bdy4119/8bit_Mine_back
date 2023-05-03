@@ -32,6 +32,7 @@
 		where id=#{id}
 	</update>
 	
+	
 	<!-- business delete -->
 	<update id="deleteBusiness">
 		delete from businesscard
