@@ -146,19 +146,14 @@ create table mine_mine(
 -- -------------------인서 ------------------------------------------------------------------------------------
 
 create table user(
-id varchar(20) primary key,
-pwd varchar(50) not null,
-name varchar(50) not null,
-email varchar(100) not null,
-phone varchar(12) not null,
-regi_date timestamp not null,
-user_auth int default 1,
-user_state varchar(100),
-cause varchar(100),
-mail_auth int default 0,
-mail_key varchar(50),
-imagefilename varchar(50) default "profileimage.jpg",
-newimagefilename varchar(50) default "profileimage.jpg"
+	email varchar(100) primary key,
+	name varchar(50) not null,
+	regidate timestamp not null,
+	id varchar(50),
+	social varchar(50),
+	auth int,
+	cause varchar(100),
+	token varchar(200)
 );
 
 create table report(
