@@ -97,14 +97,14 @@ create table mine_mine(
 -- -------------------인서 ------------------------------------------------------------------------------------
 
 create table user(
-    email varchar(100) primary key,
+	email varchar(100) primary key,
 	name varchar(50) not null,
 	regidate timestamp not null,
-    id varchar(50),
-    social varchar(50),
+	id varchar(50),
+	social varchar(50),
 	auth int,
 	cause varchar(100),
-    token varchar(200)
+	token varchar(200)
 );
 
 create table report(
