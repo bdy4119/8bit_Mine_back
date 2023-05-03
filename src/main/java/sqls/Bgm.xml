@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.dao.BgmDao">
+
+<insert id="bgm_add" parameterType="mul.cam.a.dto.BgmDto">
+	INSERT INTO BGM(ID, ARTIST, TITLE, URL)
+	VALUES(#{id}, #{artist}, #{title}, #{url})
+</insert>
+
+<select id="bgm_list" parameterType="String" resultType="mul.cam.a.dto.BgmDto">
+	SELECT *
+	FROM BGM
+	WHERE ID=#{id}
+	ORDER BY SEQ ASC;
+</select>
+
+<select id="bgm_detail" parameterType="Integer" resultType="mul.cam.a.dto.BgmDto">
+	SELECT *
+	FROM BGM
+	WHERE SEQ=#{seq}
+</select>
+
+<delete id="bgm_del" parameterType="Integer">
+	DELETE FROM BGM
+	WHERE SEQ=#{seq}
+</delete>
+</mapper>
