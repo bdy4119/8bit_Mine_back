@@ -123,9 +123,9 @@ create table businesscardBack(
 create table mine_mine(
     seq int auto_increment primary key,
     id varchar(50) not null, 
-    pagenumber int not null,
     position int not null,
-    imgurl varchar(300) not null,
+    filename varchar(50) not null,	-- 원본 파일명
+    newfilename varchar(50) not null, -- 업로드 파일명
     imgtext varchar(500) not null
 );
 
