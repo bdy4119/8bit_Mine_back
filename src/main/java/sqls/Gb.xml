@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.dao.GbDao">
+
+<!-- <insert id="gb_add" parameterType="mul.cam.a.dto.GbDto">
+	INSERT INTO GUESTBOOK(TO_ID, FROM_ID, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE)
+	VALUES(#{to_id}, #{from_id}, #{comment}, (SELECT IFNULL(MAX(REF),0)+1 FROM GUESTBOOK G), 0, #{isvoice}, #{filename}, now())
+</insert> -->
+
+<insert id="gb_add" parameterType="mul.cam.a.dto.GbDto">
+	INSERT INTO GUESTBOOK(TOID, FROMID, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE)
+	VALUES(#{toid}, #{fromid}, #{comment}, (SELECT IFNULL(MAX(REF),0)+1 FROM GUESTBOOK G), 0, #{isvoice}, #{filename}, now())
+</insert>
+
+
+<!-- 주인한테 보이는 방명록 -->
+<select id="gb_list" parameterType="String" resultType="mul.cam.a.dto.GbDto">
+	SELECT *
+	FROM GUESTBOOK
+	WHERE TOID=#{id}
+</select>
+
+<!-- 내가 작성한 방명록 -->
+<select id="gb_visit" parameterType="String" resultType="mul.cam.a.dto.GbDto">
+	SELECT *
+	FROM GUESTBOOK
+	WHERE FROMID=#{id}
+</select>
+
+<!-- 수정하려면 먼저 디테일 불러서 세팅해놓고 -->
+<select id="gb_detail" parameterType="Integer" resultType="mul.cam.a.dto.GbDto">
+	SELECT *
+	FROM GUESTBOOK
+	WHERE SEQ=#{seq}
+</select>
+
+<!-- 수정 누르면 변한 데이터를 업데이트할 수 있게. -->
+<update id="gb_upd" parameterType="mul.cam.a.dto.GbDto">
+	UPDATE GUESTBOOK
+	SET COMMENT=#{comment}, ISVOICE=#{isvoice}, FILENAME=#{filename}, REGDATE=now()
+	WHERE SEQ=#{seq}
+</update>
+
+
+<delete id="gb_del" parameterType="Integer">
+	DELETE FROM GUESTBOOK
+	WHERE SEQ=#{seq}
+</delete>
+
+</mapper>

@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import mul.cam.a.dao.MeDao;
 import mul.cam.a.dto.DiaryDto;
 import mul.cam.a.dto.MeParam;
-import mul.cam.a.dto.MemberDto;
 import mul.cam.a.dto.TodoDto;
 import mul.cam.a.dto.TodoParam;
 import mul.cam.a.service.MeService;
-import mul.cam.a.service.MemberService;
 
 @RestController
 public class MeController {
