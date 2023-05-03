@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.dao.MineDao">
+
+<select id="mineData" parameterType="Integer" resultType="mul.cam.a.dto.MineDto">
+	select * from mine_mine
+	where position=#{position}
+</select>
+
+<select id="minelist" parameterType="String" resultType="mul.cam.a.dto.MineDto">
+	select * from mine_mine
+	where id=#{id}
+	order by position
+</select>
+
+<update id="updatemine" parameterType="mul.cam.a.dto.MineDto">
+	update mine_mine
+	set filename=#{filename}, newfilename=#{newfilename}, imgtext=#{imgtext}
+	where id=#{id} and position=#{position}
+</update>
+
+<insert id="insertmine" parameterType="mul.cam.a.dto.MineDto">
+	insert into mine_mine(id, position, filename, newfilename, imgtext)
+	values(#{id}, #{position}, #{filename}, #{newfilename}, #{imgtext})
+</insert>
+
+<delete id="deletemine" parameterType="mul.cam.a.dto.MineDto">
+	delete from mine_mine
+	where id=#{id} and position=#{position}
+</delete>
+
+<select id="checkmine" parameterType="mul.cam.a.dto.MineDto" resultType="Integer">
+	select count(*)
+	from mine_mine
+	where position=#{position}
+</select>
+
+<insert id="stageinsert" parameterType="mul.cam.a.dto.MineDto">
+	insert into mine_mine(id, position, filename, newfilename, imgtext)
+	values(#{id}, #{position}, 'back', 'stage', #{imgtext})
+</insert>
+
+<update id="stageupdate" parameterType="mul.cam.a.dto.MineDto">
+	update mine_mine
+	set imgtext=#{imgtext}
+	where id=#{id} and position=#{position}
+</update>
+
+<insert id="queinsert" parameterType="mul.cam.a.dto.MineDto">
+	insert into mine_mine(id, position, filename, newfilename, imgtext)
+	values(#{id}, #{position}, #{filename}, #{newfilename}, #{imgtext})
+</insert>
+
+<update id="queupdate" parameterType="mul.cam.a.dto.MineDto">
+	update mine_mine
+	set filename=#{filename}, newfilename=#{newfilename}, imgtext=#{imgtext}
+	where id=#{id} and position=#{position}
+</update>
+
+
+</mapper>
