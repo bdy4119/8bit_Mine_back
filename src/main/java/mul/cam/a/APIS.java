@@ -3,44 +3,33 @@ package mul.cam.a;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
-import mul.cam.a.dto.BgmDto;
-
 
 public class APIS {
 
 	// 네이버 책 검색 API
 	public static String naverBook(String search, int page) {
 
-		String clientId = "Naver 책검색 client Id"; //애플리케이션 클라이언트 아이디
-		String clientSecret = "Naver 책검색 client Secret"; //애플리케이션 클라이언트 시크릿
+		String clientId = APIKEY.book_Id; //애플리케이션 클라이언트 아이디
+		String clientSecret = APIKEY.book_Secret; //애플리케이션 클라이언트 시크릿
 
-		String text = null;
-		try {
-			text = URLEncoder.encode(search, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("검색어 인코딩 실패",e);
-		}
-
-		String apiURL = "https://openapi.naver.com/v1/search/book?query=" + text + "&start=" + (page * 10 + 1) + "&display=" + 10;    // JSON 결과
+		String apiURL = "https://openapi.naver.com/v1/search/book?query=" + search + "&start=" + (page * 10 + 1) + "&display=" + 10;    // JSON 결과
 
 		Map<String, String> requestHeaders = new HashMap<>();
 		requestHeaders.put("X-Naver-Client-Id", clientId);
@@ -107,8 +96,8 @@ public class APIS {
 	// 네이버 STT API
 	public static String stt(String filepath) {
 
-		String clientId = "Naver STT Client ID";             // Application Client ID";
-		String clientSecret = "Naver STT Client Secret ";     // Application Client Secret";
+		String clientId = APIKEY.stt_Id;             // Application Client ID";
+		String clientSecret = APIKEY.stt_Secret;     // Application Client Secret";
 
 		StringBuffer response = new StringBuffer();
 
@@ -163,13 +152,13 @@ public class APIS {
 
 	// Kakao local
 	public static Map kakaoLocal(String query, int page) throws Exception {
-		String api_key = "Kakao Local APIKEY"; 
+		String api_key = APIKEY.kakao_Key; 
 		String api_url = "https://dapi.kakao.com/v2/local/search/keyword.json?size=10&query=";
 		URL obj;
 
-		String place = URLEncoder.encode(query, "UTF-8");
+//		String place = URLEncoder.encode(query, "UTF-8");
 
-		obj = new URL(api_url + place + "&page=" + page);
+		obj = new URL(api_url + query + "&page=" + page);
 
 		HttpURLConnection con = (HttpURLConnection)obj.openConnection();
 
@@ -200,7 +189,7 @@ public class APIS {
 	// TMDB Search(Movie, Drama)
 	public static Map tmdb(String kind, String query, int page) throws Exception {
 
-		String api_key = "TMDB Key";
+		String api_key = APIKEY.tmdb_Key;
 		String api_url = "";
 
 		if(kind.equals("movie")) {
@@ -216,21 +205,22 @@ public class APIS {
 
 		HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
 
-		String url = api_url + "?api_key=" + api_key + "&language=ko-KR&query=" + query + "&page=" + page;
+		String uriString = api_url + "?api_key=" + api_key + "&language=ko-KR&query=" + query + "&page=" + page;
+		URI uri = new URI(uriString);
 
-		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity,
+		ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity,
 				String.class);
 
 		JSONParser jp = new JSONParser();	
 		JSONObject jo = (JSONObject) jp.parse(response.getBody());
-
+		System.out.println(jo.toString());
 		return jo;
 	}
 
 	// Youtube Search
 	public static Map ytSearch(String query) throws Exception {
 
-		String api_key = "Youtube API KEY";
+		String api_key = APIKEY.yt_Key;
 		String api_url = "https://www.googleapis.com/youtube/v3/search";
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -240,9 +230,10 @@ public class APIS {
 
 		HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
 
-		String url = api_url + "?part=snippet&q=" + query + "&maxResults=10&key=" + api_key;
-
-		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity,
+		String uriString = api_url + "?part=snippet&q=" + query + "&maxResults=10&key=" + api_key;
+		URI uri = new URI(uriString);
+		
+		ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity,
 				String.class);
 
 		JSONParser jp = new JSONParser();	
@@ -254,9 +245,7 @@ public class APIS {
 	// ChatGPT : Youtube URL에서 가수/노래 제목 구분 (1분에 3번 호출 가능 / Free trial 넘어가면 pay)
 	public static String ChatGptBgm(String prompt, float temperature, int maxTokens) throws Exception {
 
-		//		String query = URLEncoder.encode(prompt, "UTF-8");
-
-		String API_KEY = "ChatGPT API KEY";
+		String API_KEY = APIKEY.gpt_Key;
 		String ENDPOINT = "https://api.openai.com/v1/completions";
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -264,7 +253,7 @@ public class APIS {
 
 		Map<String, Object> requestBody = new HashMap<>();
 		requestBody.put("model","text-davinci-003");
-		requestBody.put("prompt", prompt);
+		requestBody.put("prompt", URLDecoder.decode(prompt));
 		requestBody.put("temperature", temperature);
 		requestBody.put("max_tokens", maxTokens);
 
