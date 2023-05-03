@@ -62,8 +62,57 @@ IN_TEMP  VARCHAR(200), -- 음성담기
 
 -----------------------태우----------------------------------
 
--- -------------------다연 ------------------------------------------------------------------------------------
 
+-- -------------------다연 ------------------------------------------------------------------------------------
+-- 다이어리 리스트 db
+create table calendar(
+	seq int auto_increment primary key,
+	id varchar(50) not null, 
+	title varchar(200) not null,
+	content varchar(4000),
+	rdate varchar(256) not null,
+	wdate timestamp not null,
+    del decimal(1) not null
+);
+
+
+-- todo리스트 db
+create table todo(
+	seq int auto_increment primary key,
+	id varchar(50) not null, 
+	title varchar(200) not null,
+	content varchar(4000),
+	rdate varchar(256) not null,
+	wdate timestamp not null,
+    del decimal(1) not null
+);
+
+
+-- 온라인 명함 DB -------------------------------------------
+create table businesscard(
+    seq int auto_increment primary key,
+	id varchar(50) not null,
+    thumbnail varchar(4000) not null,
+    introduce varchar(4000) not null,
+    phoneNum varchar(255) not null,
+    name varchar(50) not null,
+    email varchar(50) unique,
+    url varchar(255),  -- 깃허브 블로그등 주소
+    wdate timestamp not null
+);
+
+
+
+-- 명함 뒷면-----
+create table businesscardBack(
+	seq int auto_increment primary key,
+    id varchar(50) not null,
+	historyDate varchar(200) not null, -- 수행날짜
+    historyTitle varchar(2000) not null, -- 수행제목
+    historyContent varchar(4000) not null, -- 수행내용
+    historyUrl varchar(255),
+    wdate timestamp not null
+);
 
 -- -------------------다연 ------------------------------------------------------------------------------------
 
