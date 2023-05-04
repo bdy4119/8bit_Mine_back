@@ -1,7 +1,6 @@
 package mul.cam.a;
 
 import javax.sql.DataSource;
-
 import java.io.IOException;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -55,30 +54,6 @@ public class DatabaseConfig {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

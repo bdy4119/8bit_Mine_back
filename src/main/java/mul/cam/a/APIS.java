@@ -30,8 +30,8 @@ public class APIS {
 	// 네이버 책 검색 API
 	public static String naverBook(String search, int page) {
 
-		String clientId = "Naver 책검색 client Id"; //애플리케이션 클라이언트 아이디
-		String clientSecret = "Naver 책검색 client Secret"; //애플리케이션 클라이언트 시크릿
+		String clientId = "";
+		String clientSecret = "";
 
 		String text = null;
 		try {
@@ -107,8 +107,8 @@ public class APIS {
 	// 네이버 STT API
 	public static String stt(String filepath) {
 
-		String clientId = "Naver STT Client ID";             // Application Client ID";
-		String clientSecret = "Naver STT Client Secret ";     // Application Client Secret";
+		String clientId = "";
+		String clientSecret = "";     // Application Client Secret";
 
 		StringBuffer response = new StringBuffer();
 
@@ -163,7 +163,7 @@ public class APIS {
 
 	// Kakao local
 	public static Map kakaoLocal(String query, int page) throws Exception {
-		String api_key = "Kakao Local APIKEY"; 
+		String api_key = ""; 
 		String api_url = "https://dapi.kakao.com/v2/local/search/keyword.json?size=10&query=";
 		URL obj;
 
@@ -200,7 +200,7 @@ public class APIS {
 	// TMDB Search(Movie, Drama)
 	public static Map tmdb(String kind, String query, int page) throws Exception {
 
-		String api_key = "TMDB Key";
+		String api_key = "";
 		String api_url = "";
 
 		if(kind.equals("movie")) {
@@ -230,7 +230,7 @@ public class APIS {
 	// Youtube Search
 	public static Map ytSearch(String query) throws Exception {
 
-		String api_key = "Youtube API KEY";
+		String api_key = "";
 		String api_url = "https://www.googleapis.com/youtube/v3/search";
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -256,7 +256,7 @@ public class APIS {
 
 		//		String query = URLEncoder.encode(prompt, "UTF-8");
 
-		String API_KEY = "ChatGPT API KEY";
+		String API_KEY = "";
 		String ENDPOINT = "https://api.openai.com/v1/completions";
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
