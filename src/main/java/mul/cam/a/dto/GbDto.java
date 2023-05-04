@@ -6,7 +6,9 @@ public class GbDto implements Serializable {
 
 	private int seq;
 	private String toid;
+	private String toname;
 	private String fromid;
+	private String fromname;
 	private String comment;
 	private int ref;
 	private int step;
@@ -16,13 +18,15 @@ public class GbDto implements Serializable {
 	
 	public GbDto() {
 	}
-
-	public GbDto(int seq, String toid, String fromid, String comment, int ref, int step, int isvoice, String filename,
-			String regdate) {
+	
+	public GbDto(int seq, String toid, String toname, String fromid, String fromname, String comment, int ref, int step,
+			int isvoice, String filename, String regdate) {
 		super();
 		this.seq = seq;
 		this.toid = toid;
+		this.toname = toname;
 		this.fromid = fromid;
+		this.fromname = fromname;
 		this.comment = comment;
 		this.ref = ref;
 		this.step = step;
@@ -30,6 +34,8 @@ public class GbDto implements Serializable {
 		this.filename = filename;
 		this.regdate = regdate;
 	}
+
+
 
 	public int getSeq() {
 		return seq;
@@ -47,12 +53,28 @@ public class GbDto implements Serializable {
 		this.toid = toid;
 	}
 
+	public String getToname() {
+		return toname;
+	}
+
+	public void setToname(String toname) {
+		this.toname = toname;
+	}
+
 	public String getFromid() {
 		return fromid;
 	}
 
 	public void setFromid(String fromid) {
 		this.fromid = fromid;
+	}
+
+	public String getFromname() {
+		return fromname;
+	}
+
+	public void setFromname(String fromname) {
+		this.fromname = fromname;
 	}
 
 	public String getComment() {
@@ -103,5 +125,6 @@ public class GbDto implements Serializable {
 		this.regdate = regdate;
 	}
 
+	
 	
 }

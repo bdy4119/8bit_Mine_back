@@ -9,8 +9,8 @@
 </insert> -->
 
 <insert id="gb_add" parameterType="mul.cam.a.dto.GbDto">
-	INSERT INTO GUESTBOOK(TOID, FROMID, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE)
-	VALUES(#{toid}, #{fromid}, #{comment}, (SELECT IFNULL(MAX(REF),0)+1 FROM GUESTBOOK G), 0, #{isvoice}, #{filename}, now())
+	INSERT INTO GUESTBOOK(TOID, TONAME, FROMID, FROMNAME, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE)
+	VALUES(#{toid}, #{toname}, #{fromid}, #{fromname}, #{comment}, (SELECT IFNULL(MAX(REF),0)+1 FROM GUESTBOOK G), 0, #{isvoice}, #{filename}, now())
 </insert>
 
 
