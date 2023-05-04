@@ -23,8 +23,8 @@ public class BusinessService {
 	}
 	
 	//명함 상세보기
-	public BusinessDto businessDetail(String id) {
-		return dao.businessDetail(id);
+	public BusinessDto businessDetail(String email) {
+		return dao.businessDetail(email);
 	}
 	
 	public boolean writeBusiness(BusinessDto dto) {

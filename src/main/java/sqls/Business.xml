@@ -15,13 +15,13 @@
 										resultType="mul.cam.a.dto.BusinessDto">
 		select *
 		from businesscard
-		where id=#{id}
+		where email=#{email}
 	</select>
 
 	<!-- businesswrite -->
 	<insert id="writeBusiness" parameterType="mul.cam.a.dto.BusinessDto">
-		insert into businesscard(id, thumbnail, name, email, url, wdate, phoneNum, introduce)
-		values(#{id}, #{thumbnail}, #{name}, #{email}, #{url}, now(), #{phoneNum}, #{introduce})	
+		insert into businesscard(id, thumbnail, name, email, url, phoneNum, introduce, wdate)
+		values(#{id}, #{thumbnail}, #{name}, #{email}, #{url}, #{phoneNum}, #{introduce}, now())	
 	</insert>
 	
 	<!-- business update -->
@@ -29,7 +29,7 @@
 		update businesscard
 		set thumbnail=#{thumbnail}, name=#{name}, email=#{email}, url=#{url},
 				 phoneNum=#{phoneNum}, introduce=#{introduce}
-		where id=#{id}
+		where email=#{email}
 	</update>
 	
 	

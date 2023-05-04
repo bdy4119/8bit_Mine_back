@@ -49,10 +49,10 @@ public class BusinessController {
 	
 	//명함 디테일
 	@GetMapping(value="businessDetail")
-	public BusinessDto businessDetail(String id) {
+	public BusinessDto businessDetail(String email) {
 		System.out.println("BusinessController businessDetail " + new Date());
 		
-		return service.businessDetail(id);
+		return service.businessDetail(email);
 	}
 	
 	
