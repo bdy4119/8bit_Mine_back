@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.dao.MeDao">
+
+	<!-- todo리스트 불러오기 -->
+	<select id="getTodoList" parameterType="mul.cam.a.dto.TodoParam"
+		resultType="mul.cam.a.dto.TodoDto">
+
+		select seq, id, title, content, rdate, wdate, del
+		from
+			(select row_number()over(order by rdate desc) as rnum,
+				seq, id, title, content, rdate, wdate, del
+			 from todo
+			 where 1=1 
+			<!-- <if test="choice != null and choice != '' and search != null and search != '' ">
+			 	<if test="choice == 'title'">
+			 		and title like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 	<if test="choice == 'content'">
+			 		and content like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 </if>	  -->
+			 order by rdate desc) a
+		<!-- where rnum between ${start} and ${end}-->
+	</select>
+	
+	
+	<!-- todowrite -->
+	<insert id="writeTodo" parameterType="mul.cam.a.dto.TodoDto">
+		insert into todo(id, title, content, rdate, wdate, del)
+		values(#{id}, #{title}, #{content}, #{rdate} ,now(), 0)	
+	</insert>
+	
+	<!-- todo update -->
+	<update id="updateTodo" parameterType="mul.cam.a.dto.TodoDto">
+		update todo
+		set title=#{title}, content=#{content}, rdate=#{rdate}
+		where seq=#{seq}
+	</update>
+	
+	<!-- todo del update(체크 여부) -->
+	<update id="updateCheck" parameterType="mul.cam.a.dto.TodoDto">
+		update todo
+		set del=#{del}
+		where seq=#{seq}
+	</update>
+	
+	<!-- todo delete -->
+	<update id="deleteTodo">
+		delete from todo
+		where seq=#{seq}
+	</update>
+	
+	
+	<!-- todo 글의 총수 -->
+	<select id="getAllTodo" parameterType="mul.cam.a.dto.TodoParam" resultType="java.lang.Integer">	
+		select ifnull(count(*), 0)
+		from todo
+		<if test="choice != null and choice != '' and search != null and search != '' ">
+		 	<if test="choice == 'title'">
+		 		where title like concat('%', #{search}, '%') and del=0
+		 	</if>
+		 	<if test="choice == 'content'">
+		 		where content like concat('%', #{search}, '%') and del=0
+		 	</if>
+		 	<if test="choice == 'writer'">
+		 		where id=#{search} and del=0
+		 	</if>
+		 </if>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!--                         diarypart                         -->
+	<!-- calendar리스트 불러오기 -->
+	<select id="getDiaryList" parameterType="mul.cam.a.dto.MeParam"
+		resultType="mul.cam.a.dto.DiaryDto">
+
+		select seq, id, title, content, rdate, wdate, del
+		from
+			(select row_number()over(order by rdate desc) as rnum,
+				seq, id, title, content, rdate, wdate, del
+			 from calendar
+			 where 1=1 
+			 <if test="choice != null and choice != '' and search != null and search != '' ">
+			 	<if test="choice == 'title'">
+			 		and title like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 	<if test="choice == 'content'">
+			 		and content like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 </if>	 
+			  order by rdate asc ) a
+			  where rnum between ${start} and ${end}
+<!-- 				and rdate = DATE_FORMAT(CURDATE(), "%Y-%m-%d") -->
+	</select>
+	
+	
+	<!-- diary 글의 총수 -->
+	<select id="getAllDiary" parameterType="mul.cam.a.dto.MeParam" resultType="java.lang.Integer">
+		select ifnull(count(*), 0)
+		from calendar
+		<if test="choice != null and choice != '' and search != null and search != '' ">
+		 	<if test="choice == 'title'">
+		 		where title like concat('%', #{search}, '%') and del=0
+		 	</if>
+		 	<if test="choice == 'content'">
+		 		where content like concat('%', #{search}, '%') and del=0
+		 	</if>
+		 	<if test="choice == 'writer'">
+		 		where id=#{search} and del=0
+		 	</if>
+		 </if>
+	</select>
+	
+	<!-- diary insert -->
+	<insert id="writeDiary" parameterType="mul.cam.a.dto.DiaryDto">
+		insert into calendar(id, title, content, rdate, wdate, del)
+		values(#{id}, #{title}, #{content}, #{rdate} ,now(), 0)	
+	</insert>
+	
+	<!-- diary update -->
+	<update id="updateDiary" parameterType="mul.cam.a.dto.DiaryDto">
+		update calendar
+		set title=#{title}, content=#{content}, rdate=#{rdate}
+		where seq=#{seq}
+	</update>
+	
+	<!-- diary delete -->
+	<update id="deleteDiary">
+		delete from calendar
+		where seq=#{seq}
+	</update>
+	
+	
+	
+	
+	<!-- calendar전체리스트 불러오기 -> 달력 뿌릴용-->
+	<select id="getDiaryCalList" parameterType="mul.cam.a.dto.MeParam"
+		resultType="mul.cam.a.dto.DiaryDto">
+
+		select seq, id, title, content, rdate, wdate, del
+		from
+			(select row_number()over(order by rdate desc) as rnum,
+				seq, id, title, content, rdate, wdate, del
+			 from calendar
+			 where 1=1 
+			 <if test="choice != null and choice != '' and search != null and search != '' ">
+			 	<if test="choice == 'title'">
+			 		and title like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 	<if test="choice == 'content'">
+			 		and content like concat('%', #{search}, '%') and del=0
+			 	</if>
+			 </if>	 
+			  order by rdate asc ) a
+			  where rnum between ${start} and ${end}
+	</select>
+	
+	
+</mapper>

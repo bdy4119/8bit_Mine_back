@@ -1,8 +1,8 @@
 package mul.cam.a;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,9 +17,9 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@PropertySource("classpath:/application.properties")
-public class DatabaseConfig {
+@PropertySource("classpath:application.properties")
 
+public class DatabaseConfig {
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource.hikari")
 	public HikariConfig hikariConfig() {
@@ -29,12 +29,14 @@ public class DatabaseConfig {
 	@Bean
 	public DataSource dataSource() {
 		DataSource dataSource = new HikariDataSource(hikariConfig());
-		System.out.println("dataSource:" + dataSource);
+		
+		System.out.println("dataSource: " + dataSource);
+		
 		return dataSource;
 	}
 	
 	@Bean
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
 		System.out.println("DatabaseConfig sqlSessionFactory");
 		
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
@@ -44,17 +46,14 @@ public class DatabaseConfig {
 		sqlSessionFactoryBean.setMapperLocations(arrResource);
 		sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
 		
-		return (SqlSessionFactory)sqlSessionFactoryBean.getObject();		
+		return (SqlSessionFactory)sqlSessionFactoryBean.getObject();
 	}
 	
 	@Bean
 	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
-	}	
+	}
 }
-
-
-
 
 
 

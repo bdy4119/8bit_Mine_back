@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	 
+<mapper namespace="mul.cam.a.dao.FileloadDao">
+
+<!--리스트  -->
+<select id="fileList" resultType="mul.cam.a.dto.FileloadDto" parameterType="mul.cam.a.dto.FileloadParam">
+	SELECT MF_SEQ, MF_CATEGORY, MF_TITLE, MF_REGDATE, MF_MEMO,
+			MF_FILE_ID,MF_FILENAME, MF_NEWFILENAME,MF_USER_ID
+	FROM (SELECT ROW_NUMBER()OVER(ORDER BY MF_REGDATE DESC)AS RNUM,
+			MF_SEQ, MF_CATEGORY, MF_TITLE, MF_REGDATE, MF_MEMO, MF_FILE_ID,
+			MF_FILENAME, MF_NEWFILENAME,MF_USER_ID FROM MY_FILELOAD
+	WHERE 1=1
+		<if test="choice != null and choice != '' and search != null and search != ''">
+			<if test="choice == 'title'">
+			AND MF_TITLE LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="choice == 'content'">
+			AND MF_MEMO LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="choice == 'writer'">
+			AND MF_FILE_ID LIKE CONCAT('%', #{search}, '%')
+			</if>
+		</if>
+		ORDER BY MF_REGDATE DESC) a
+	WHERE RNUM BETWEEN ${start} AND ${end}
+		
+</select>		
+		
+<!--글의총수  -->	
+<select id="getAllfile" parameterType="mul.cam.a.dto.FileloadParam" resultType="mul.cam.a.dto.FileloadDto">
+	
+	select ifnull(count(*), 0)
+	from MY_FILELOAD
+	<if test="choice != null and choice != '' and search != null and search != '' ">
+	 	<if test="choice == 'title'">
+	 		where title like concat('%', #{search}, '%') and del=0
+	 	</if>
+	 	<if test="choice == 'memo'">
+	 		where content like concat('%', #{search}, '%') and del=0
+	 	</if>
+	 	<if test="choice == 'writer'">
+	 		where id=#{search} and del=0
+	 	</if>
+	 </if>
+</select>
+
+<!-- <select id="getAllfile" resultType="Integer">
+	
+	SELECT COUNT(*)
+	FROM MY_FILELOAD
+</select>
+ -->
+
+
+<!-- 게시글 상세보기 -->
+<select id="fileDetail" parameterType="Integer" resultType="mul.cam.a.dto.FileloadDto">
+SELECT *
+FROM MY_FILELOAD
+WHERE MF_SEQ = ${mfSeq}
+</select>
+
+<!--파일삭제 -->
+<delete id="deleteFile" parameterType="mul.cam.a.dto.FileloadDto">
+DELETE FROM MY_FILELOAD
+WHERE MF_SEQ = ${mfSeq}	
+</delete>
+	
+	
+<!-- 파일수정 -->
+<update id="updateFile" parameterType="mul.cam.a.dto.FileloadDto">
+	UPDATE MY_FILELOAD
+	SET MF_TITLE=#{mfTitle},MF_TITLE=#{mfTitle}, MF_CATEGORY=#{mfCategory}, mfMemo=#{mfMemo} 
+	MF_FILENAME=#{filename}, MF_NEWFILENAME=#{mfNFilename}, mfRegdate=now()
+	WHERE MF_SEQ=#{mfSeq}
+</update>
+
+
+
+<!-- 업로드 파일 -->	
+<insert id="uploadFile" parameterType="mul.cam.a.dto.FileloadDto">
+insert into MY_FILELOAD(MF_CATEGORY, MF_TITLE, MF_MEMO, MF_FILE_Id, MF_FILENAME, MF_NEWFILENAME)
+values(#{mfCategory}, #{mfTitle}, #{mfMemo}, #{mfFileId},#{mfFilename},#{mfNFilename})
+</insert>
+
+
+<!-- 다운로드 파일 -->		
+<select id="downFile" parameterType="Integer" resultType="mul.cam.a.dto.FileloadDto">
+	select MF_SEQ, MF_CATEGORY, MF_TITLE, MF_REGDATE, MF_MEMO, MF_FILE, MF_FILENAME,  MF_NEWFILENAME
+	from MY_FILELOAD
+	where MF_SEQ=#{mfSeq}
+</select>
+
+
+
+	
+
+</mapper>
