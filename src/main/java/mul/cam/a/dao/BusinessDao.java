@@ -18,7 +18,7 @@ public interface BusinessDao {
 	List<BusinessDto> businesscard(BusinessDto dto);
 	
 	//명함 상세보기
-	BusinessDto businessDetail(String id);
+	BusinessDto businessDetail(String email);
 	
 	//글쓰기
 	int writeBusiness(BusinessDto dto);
