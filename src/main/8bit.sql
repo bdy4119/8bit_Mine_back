@@ -27,7 +27,7 @@ CREATE TABLE MY_FILELOAD(
 -- 다이어리 리스트 db
 create table calendar(
 	seq int auto_increment primary key,
-	id varchar(50) not null, 
+	id varchar(50), 
 	title varchar(200) not null,
 	content varchar(4000),
 	rdate varchar(256) not null,
@@ -35,11 +35,11 @@ create table calendar(
     del decimal(1) not null
 );
 
-
+select * from businesscard;
 -- todo리스트 db
 create table todo(
 	seq int auto_increment primary key,
-	id varchar(50) not null, 
+	id varchar(50), 
 	title varchar(200) not null,
 	content varchar(4000),
 	rdate varchar(256) not null,
@@ -51,7 +51,7 @@ create table todo(
 -- 온라인 명함 DB -------------------------------------------
 create table businesscard(
     seq int auto_increment primary key,
-	id varchar(50) not null,
+	id varchar(50),
     thumbnail varchar(4000) not null,
     introduce varchar(4000) not null,
     phoneNum varchar(255) not null,
@@ -62,11 +62,10 @@ create table businesscard(
 );
 
 
-
 -- 명함 뒷면-----
 create table businesscardBack(
 	seq int auto_increment primary key,
-    id varchar(50) not null,
+    id varchar(50),
 	historyDate varchar(200) not null, -- 수행날짜
     historyTitle varchar(2000) not null, -- 수행제목
     historyContent varchar(4000) not null, -- 수행내용
