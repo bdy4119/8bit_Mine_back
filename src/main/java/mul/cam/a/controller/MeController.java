@@ -19,6 +19,7 @@ import mul.cam.a.dto.MeParam;
 import mul.cam.a.dto.TodoDto;
 import mul.cam.a.dto.TodoParam;
 import mul.cam.a.service.MeService;
+import mul.cam.a.util.CalendarApi;
 
 @RestController
 public class MeController {
@@ -190,6 +191,18 @@ public class MeController {
 		service.deleteDiary(seq);
 	}
 	
+	
+	
+	//공휴일 API
+	@GetMapping(value="CalendarApi")
+	public String Holiday(String year) {
+		System.out.println("Holiday" + new Date());
+		String json = CalendarApi.CalenderApi(year);
+		
+		System.out.println(json);
+		
+		return json;
+	}
 	
 	
 }

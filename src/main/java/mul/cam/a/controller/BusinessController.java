@@ -167,7 +167,10 @@ public class BusinessController {
 			//기본파일명 -> 시간파일명
 			//파일이 없을 경우 아래 코드들 실행되면 안됨
 			String filename = uploadFile.getOriginalFilename();
-			String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/Business-img/" + filename;	//실제경로 + 원본파일명	
+	//		String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/Business-img/" + filename;	//실제경로 + 원본파일명	
+			
+			//다연 경로
+			String filepath = "C:\\Users\\PC\\Desktop\\_multicam\\_final-project\\_react-front\\8bit_Mine_Front\\public\\Business-img\\" + filename;	//실제경로 + 원본파일명
 			
 			System.out.println(filepath);
 			
