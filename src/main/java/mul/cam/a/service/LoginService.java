@@ -71,4 +71,14 @@ public class LoginService {
 	public List<LoginDto> userList() {
 		return dao.userList();
 	}
+	
+	public boolean updateState(LoginDto dto) {
+		int i = dao.updateState(dto);
+		
+		return i>0?true:false;
+	}
+	
+	public List<LoginDto> searchList(String search) {
+		return dao.searchList(search);
+	}
 }

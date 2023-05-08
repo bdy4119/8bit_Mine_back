@@ -466,6 +466,90 @@ public class LoginController {
 		
 		return map;
 	}
+	
+	@GetMapping(value = "/updateState")
+	public String updateState(LoginDto dto) {
+		System.out.println(dto);
+		
+		boolean b = service.updateState(dto);
+		
+		if (b) {
+			return "success";
+		}
+		
+		return "error";
+	}
+	
+	@GetMapping(value = "/callback/naver")
+	public String naverlogin(String email) {
+		String social = "naver";
+		// naver는 id값이 따로 없음
+		String id = "0123456789";
+		
+		// 사용자 정보 출력
+		System.out.println("이메일: " + email);
+		
+		// 서버 jwt 발행 (pom.xml에 jwt 세팅 필요)
+		// jwt 안에 회원의 아이디 정보 넣기
+		String jsonstring = email;
+		
+		// 암호키 (256비트 이상)
+		String secretkey = "secretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkey";
+		
+		String jwt = Jwts.builder()
+				.setSubject(jsonstring)
+				//.setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) // 유효기간 1H
+				.signWith(SignatureAlgorithm.HS256, secretkey)
+				.compact();
+		
+		// jwt 출력
+		System.out.println("JWT: " + jwt);
+		
+		// 가입 여부 체크
+		boolean emailCheckB = service.emailCheck(email);
+
+		// 최초 로그인시 DB에 회원등록
+		if (emailCheckB) {
+			System.out.println("회원 등록 진행");
+			String profPic = null;
+			String profMsg = null;
+			String job = null;
+			String birthdate = null;
+			String address = null;
+			
+			// DB에 회원등록 (id, email, jwt 등록)
+			boolean regiUserB = service.regiUser(id, email, social, jwt, profPic, profMsg, job, birthdate, address);
+			
+			if (regiUserB) {
+				System.out.println("회원 등록 성공");
+			}
+			else {
+				System.out.println("회원 등록 실패");
+			}
+		}
+		else {
+			System.out.println("회원 존재");
+		}
+		
+		// 이메일값으로 DB에서 jwt값 불러오기
+		String userJwt = service.getJwt(email);
+		
+		// 로그인한 회원의 jwt값 출력
+		System.out.println("회원 JWT: " + userJwt);
+		
+		// json web token 프론트엔드로 전달
+		return userJwt;
+	}
+	
+	@GetMapping(value = "/searchlist")
+	public Map<String, Object> searchlist(String search){
+		List<LoginDto> list = service.searchList(search);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		
+		return map;
+	}
 }
 
 

@@ -58,4 +58,16 @@
 		select *
 		from user
 	</select>
+	
+	<update id="updateState" parameterType="mul.cam.a.dto.LoginDto">
+		update user
+		set auth=#{auth}, cause=#{cause}
+		where email=#{email}
+	</update>
+	
+	<select id="searchList" parameterType="String" resultType="mul.cam.a.dto.LoginDto">
+		select *
+		from user
+		where email like concat('%', #{search}, '%')
+	</select>
 </mapper>
