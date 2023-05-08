@@ -25,8 +25,9 @@ public class LoginService {
 		return false;
 	}
 	
-	public boolean regiUser(String id, String email, String social, String jwt) {
-		int i = dao.regiUser(id, email, social, jwt);
+	public boolean regiUser(String id, String email, String social, String jwt,
+			String profPic, String profMsg, String job, String birthdate, String address) {
+		int i = dao.regiUser(id, email, social, jwt, profPic, profMsg, job, birthdate, address);
 		
 		return i>0?true:false;
 	}
@@ -57,8 +58,8 @@ public class LoginService {
 		return dao.showUser(token);
 	}
 	
-	public boolean editUser(String name, String token) {
-		int i = dao.editUser(name, token);
+	public boolean editUser(LoginDto dto) {
+		int i = dao.editUser(dto);
 		
 		return i>0?true:false;
 	}
