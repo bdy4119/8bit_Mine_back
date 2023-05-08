@@ -1,5 +1,8 @@
 package mul.cam.a.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,14 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
 import mul.cam.a.dao.MeDao;
+import mul.cam.a.dto.BusinessDto;
 import mul.cam.a.dto.DiaryDto;
 import mul.cam.a.dto.MeParam;
 import mul.cam.a.dto.TodoDto;
 import mul.cam.a.dto.TodoParam;
 import mul.cam.a.service.MeService;
+import mul.cam.a.util.CalendarApi;
 
 @RestController
 public class MeController {
@@ -191,5 +199,59 @@ public class MeController {
 	}
 	
 	
+	
+	//공휴일 API
+	@GetMapping(value="CalendarApi")
+	public String Holiday(String year) {
+		System.out.println("Holiday" + new Date());
+		String json = CalendarApi.CalenderApi(year);
+		
+		System.out.println(json);
+		
+		return json;
+	}
+	
+	
+	
+	
+	//upload
+	// upload *****************************
+		@RequestMapping(value="/diaryUpload", method=RequestMethod.POST)
+		public String fileUpload(DiaryDto dto, @RequestParam("uploadFile")
+									MultipartFile uploadFile, HttpServletRequest req) {
+			System.out.println("HelloController fileUpload" + new Date());
+			System.out.println(dto.toString());
+				
+			//경로 얻어오기
+			String path = req.getServletContext().getRealPath("/Upload");
+		//	String path = "c:\temp";	-> 여기 올리면 서버껐다가 켜도 사라지지않음(연습용)
+				
+			//기본파일명 -> 시간파일명
+			//파일이 없을 경우 아래 코드들 실행되면 안됨
+			String filename = uploadFile.getOriginalFilename();
+		//	String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/Business-img/" + filename;	//실제경로 + 원본파일명	
+				
+			//다연 경로
+			String filepath = "C:\\Users\\PC\\Desktop\\_multicam\\_final-project\\_react-front\\8bit_Mine_Front\\public\\Me-img\\" + filename;	//실제경로 + 원본파일명
+				
+			System.out.println(filepath);
+				
+//				String publicUpload = publicpath + "\\" + filename;
+				
+			//	System.out.println(publicUpload);
+				
+			try {
+				BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+				bos.write(uploadFile.getBytes());
+				bos.close(); //꼭 닫아주기!
+				
+//				BufferedOutputStream bos2 = new BufferedOutputStream(new FileOutputStream(new File(publicUpload)));
+//				bos2.write(uploadFile.getBytes());
+//				bos2.close();
+			} catch (Exception e) {
+				return "file upload fail";
+			}
+			return "file upload success";
+		}
 	
 }

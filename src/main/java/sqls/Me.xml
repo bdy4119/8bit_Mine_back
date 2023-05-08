@@ -81,10 +81,10 @@
 	<select id="getDiaryList" parameterType="mul.cam.a.dto.MeParam"
 		resultType="mul.cam.a.dto.DiaryDto">
 
-		select seq, id, title, content, rdate, wdate, del
+		select seq, id, title, thumbnail, content, rdate, wdate, del
 		from
 			(select row_number()over(order by rdate desc) as rnum,
-				seq, id, title, content, rdate, wdate, del
+				seq, id, title, thumbnail, content, rdate, wdate, del
 			 from calendar
 			 where 1=1 
 			 <if test="choice != null and choice != '' and search != null and search != '' ">
@@ -120,14 +120,14 @@
 	
 	<!-- diary insert -->
 	<insert id="writeDiary" parameterType="mul.cam.a.dto.DiaryDto">
-		insert into calendar(id, title, content, rdate, wdate, del)
-		values(#{id}, #{title}, #{content}, #{rdate} ,now(), 0)	
+		insert into calendar(id, title, thumbnail, content, rdate, wdate, del)
+		values(#{id}, #{title}, #{thumbnail}, #{content}, #{rdate} ,now(), 0)	
 	</insert>
 	
 	<!-- diary update -->
 	<update id="updateDiary" parameterType="mul.cam.a.dto.DiaryDto">
 		update calendar
-		set title=#{title}, content=#{content}, rdate=#{rdate}
+		set title=#{title}, thumbnail=#{thumbnail}, content=#{content}, rdate=#{rdate}
 		where seq=#{seq}
 	</update>
 	
