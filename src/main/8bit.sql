@@ -87,13 +87,15 @@ create table mine_mine(
     imgtext varchar(500) not null
 );
 
-
-
-
-
-
-
-
+-- mine 방명록
+create table mine_answer(
+    seq int auto_increment primary key,
+    userid varchar(50) not null, -- 작성자
+    mineid varchar(50) not null, -- 마인 주인
+    answer1 varchar(500) not null,
+    answer2 varchar(500) not null,
+    answer3 varchar(500) not null
+);
 
 
 
