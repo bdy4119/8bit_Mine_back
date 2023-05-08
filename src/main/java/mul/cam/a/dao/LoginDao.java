@@ -30,4 +30,8 @@ public interface LoginDao {
 	int authCheck(String token);
 	
 	List<LoginDto> userList();
+	
+	int updateState(LoginDto dto);
+	
+	List<LoginDto> searchList(String search);
 }
