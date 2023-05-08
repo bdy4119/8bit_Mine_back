@@ -3,9 +3,9 @@
 
 <mapper namespace="mul.cam.a.dao.MineDao">
 
-<select id="mineData" parameterType="Integer" resultType="mul.cam.a.dto.MineDto">
+<select id="mineData" parameterType="mul.cam.a.dto.MineDto" resultType="mul.cam.a.dto.MineDto">
 	select * from mine_mine
-	where position=#{position}
+	where id=#{id} and position=#{position}
 </select>
 
 <select id="minelist" parameterType="String" resultType="mul.cam.a.dto.MineDto">
@@ -33,7 +33,7 @@
 <select id="checkmine" parameterType="mul.cam.a.dto.MineDto" resultType="Integer">
 	select count(*)
 	from mine_mine
-	where position=#{position}
+	where id=#{id} and position=#{position}
 </select>
 
 <insert id="stageinsert" parameterType="mul.cam.a.dto.MineDto">
@@ -57,6 +57,23 @@
 	set filename=#{filename}, newfilename=#{newfilename}, imgtext=#{imgtext}
 	where id=#{id} and position=#{position}
 </update>
+
+<insert id="updateanswer" parameterType="mul.cam.a.dto.MineAnswerDto">
+	insert into mine_answer(userid, mineid, answer1, answer2, answer3)
+	values(#{userid}, #{mineid}, #{answer1}, #{answer2}, #{answer3})
+</insert>
+
+<select id="answerlist" parameterType="String" resultType="mul.cam.a.dto.MineAnswerDto">
+	select * from mine_answer
+	where mineid=#{mineid}
+	order by seq desc
+</select>
+
+<delete id="deleteanswer" parameterType="Integer">
+	delete from mine_answer
+	where seq=#{seq}
+</delete>
+
 
 
 </mapper>

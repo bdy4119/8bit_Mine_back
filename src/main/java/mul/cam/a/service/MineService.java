@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mul.cam.a.dao.MineDao;
+import mul.cam.a.dto.MineAnswerDto;
 import mul.cam.a.dto.MineDto;
 
 @Service
@@ -16,9 +17,9 @@ public class MineService {
 	@Autowired
 	MineDao dao;
 	
-	public MineDto mineData(int position) {
+	public MineDto mineData(MineDto dto) {
 		System.out.println("mineData Service" + new Date());
-		return dao.mineData(position);
+		return dao.mineData(dto);
 	}
 	
 	public List<MineDto> minelist(String id) {
@@ -70,6 +71,23 @@ public class MineService {
 	
 	public boolean queupdate(MineDto dto) {
 		int n = dao.queupdate(dto);
+		
+		return n>0?true:false;
+	}
+	
+	public boolean updateanswer(MineAnswerDto dto) {
+		int n = dao.updateanswer(dto);
+		
+		return n>0?true:false;
+	}
+	
+	public List<MineAnswerDto> answerlist(String mineid) {
+		System.out.println("answerlist Service" + new Date());
+		return dao.answerlist(mineid);
+	}
+	
+	public boolean deleteanswer(int seq) {
+		int n = dao.deleteanswer(seq);
 		
 		return n>0?true:false;
 	}
