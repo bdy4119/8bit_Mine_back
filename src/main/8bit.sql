@@ -27,6 +27,7 @@ create table calendar(
 	seq int auto_increment primary key,
 	id varchar(50), 
 	title varchar(200) not null,
+        thumbnail varchar(4000), -- 안되면 지우기
 	content varchar(4000),
 	rdate varchar(256) not null,
 	wdate timestamp not null,
