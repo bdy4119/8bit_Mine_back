@@ -8,6 +8,7 @@ public class DiaryDto implements Serializable{
 	private String id;		// 작성자
 	
 	private String title;
+	private String thumbnail;
 	private String content;
 	private String rdate; //약속날짜
 	private String wdate;
@@ -19,20 +20,22 @@ public class DiaryDto implements Serializable{
 	}
 	
 	//외부에서 받는 값 생성자
-	public DiaryDto(String id, String title, String content, String rdate) {
+	public DiaryDto(String id, String title, String thumbnail, String content, String rdate) {
 		super();
 		this.id = id;
 		this.title = title;
+		this.thumbnail = thumbnail;
 		this.content = content;
 		this.rdate = rdate;
 	}
 	
 
-	public DiaryDto(int seq, String id, String title, String content, String rdate, String wdate, int del) {
+	public DiaryDto(int seq, String id, String title, String thumbnail, String content, String rdate, String wdate, int del) {
 		super();
 		this.seq = seq;
 		this.id = id;
 		this.title = title;
+		this.thumbnail = thumbnail;
 		this.content = content;
 		this.rdate = rdate;
 		this.wdate = wdate;
@@ -61,6 +64,14 @@ public class DiaryDto implements Serializable{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 	public String getContent() {
@@ -97,9 +108,11 @@ public class DiaryDto implements Serializable{
 
 	@Override
 	public String toString() {
-		return "DiaryDto [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", rdate=" + rdate
-				+ ", wdate=" + wdate + ", del=" + del + "]";
+		return "DiaryDto [seq=" + seq + ", id=" + id + ", title=" + title + ", thumbnail=" + thumbnail + ", content="
+				+ content + ", rdate=" + rdate + ", wdate=" + wdate + ", del=" + del + "]";
 	}
+
+	
 	
 	
 	
