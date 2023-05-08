@@ -113,7 +113,12 @@ create table user(
 	social varchar(50),
 	auth int,
 	cause varchar(100),
-	token varchar(200)
+	token varchar(200),
+    profPic varchar(50),
+    profMsg varchar(100),
+    job varchar(100),
+    birthdate varchar(20),
+    address varchar(100)
 );
 
 create table report(
