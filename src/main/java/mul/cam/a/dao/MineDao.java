@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import mul.cam.a.dto.MineAnswerDto;
 import mul.cam.a.dto.MineDto;
 import mul.cam.a.dto.MineDto;
 
@@ -12,7 +13,7 @@ import mul.cam.a.dto.MineDto;
 @Repository
 public interface MineDao {
 	
-	MineDto mineData(int position);
+	MineDto mineData(MineDto dto);
 	
 	List<MineDto> minelist(String id);
 	
@@ -32,5 +33,10 @@ public interface MineDao {
 	
 	int queupdate(MineDto dto);
 	
+	int updateanswer(MineAnswerDto dto);
+	
+	List<MineAnswerDto> answerlist(String mineid);
+	
+	int deleteanswer(int seq);
 
 }

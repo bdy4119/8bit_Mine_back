@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mul.cam.a.dto.MineAnswerDto;
 import mul.cam.a.dto.MineDto;
 import mul.cam.a.util.NaverCloud;
 import mul.cam.a.service.MineService;
@@ -25,17 +26,18 @@ public class MineController {
 	MineService service;
 	
 	@PostMapping(value = "minedata")
-	public MineDto minedata(int position){
+	public MineDto minedata(MineDto dto){
 		System.out.println("minedata " + new Date());
-		System.out.println("position: " + position);
+		System.out.println("dto: " + dto);
 		
-		return service.mineData(position);		
+		return service.mineData(dto);		
 	}
 	
 
 	@PostMapping(value = "minelist")
 	public List<MineDto> minelist(String id){
 		System.out.println("minelist " + new Date());
+		System.out.println("id: " + id);
 		
 		return service.minelist(id);		
 	}
@@ -85,6 +87,7 @@ public class MineController {
 	@PostMapping(value = "checkmine")
 	public String checkmine(MineDto dto){
 		System.out.println("checkmine " + new Date());
+		System.out.println("dto :" + dto);
 		
 		boolean b = service.checkmine(dto);
 		
@@ -171,7 +174,8 @@ public class MineController {
 		
 		System.out.println(mine.toString());
 		
-		String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/img/" + newfilename;
+		// String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/img/" + newfilename;
+		String filepath = "C:/react/8bit_Mine_Front/public/img/" + newfilename;
 		
 		File file = new File(filepath);
 		
@@ -207,7 +211,8 @@ public class MineController {
 		
 		System.out.println(mine.toString());
 		
-		String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/img/" + newfilename;
+		// String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/img/" + newfilename;
+		String filepath = "C:/react/8bit_Mine_Front/public/img/" + newfilename;
 		File file = new File(filepath);
 		
 		try {
@@ -224,29 +229,47 @@ public class MineController {
 		return "file upload success";
 	}
 	
-	@PostMapping(value = "fileload")	// 파일 다운로드 버튼 누른 후 controller로 이동한 지점
-	public File filedownLoad(int position, HttpServletRequest req, HttpServletResponse resp) {
-		
-		MineDto mine = service.mineData(position);	
-		
-		// 경로 취득
-		String fupload = req.getServletContext().getRealPath("/upload");	
-		
-		// 다운로드 받을 파일 보내줌
-		File downloadFile = new File(fupload + "/" + mine.getNewfilename());
-		
-		resp.setContentType("image/pjpeg");
-		System.out.println(downloadFile);
-		
-		return downloadFile; 		// file-context.xml의 DownloadView 객체 생성시 id값
-	}
-	
 	@PostMapping(value = "chatBot")
 	public String chatBot(String msg) {
 		System.out.println("NaverCloudController chatBot " + new Date());
 		
 		String json = NaverCloud.chatBot(msg);		
 		return json;		
+	}
+	
+	@PostMapping(value = "updateanswer")
+	public String updateanswer(MineAnswerDto dto){
+		System.out.println("updateanswer " + new Date());
+		System.out.println("dto: " + dto.toString());
+		
+		boolean b = service.updateanswer(dto);
+		
+		if (!b) {
+			return "NO";
+		}
+		
+		return "YES";
+	}
+	
+	@PostMapping(value = "answerlist")
+	public List<MineAnswerDto> answerlist(String mineid){
+		System.out.println("answerlist " + new Date());
+		System.out.println("id: " + mineid);
+		
+		return service.answerlist(mineid);		
+	}
+	
+	@PostMapping(value = "deleteanswer")
+	public String deleteanswer(int seq){
+		System.out.println("deleteanswer " + new Date());
+		
+		boolean b = service.deleteanswer(seq);
+		
+		if (!b) {
+			return "NO";
+		}
+		
+		return "YES";
 	}
 
 }
