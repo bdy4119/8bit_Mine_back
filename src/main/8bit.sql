@@ -7,15 +7,14 @@ use mine;
 -----------------------태우----------------------------------
 
 CREATE TABLE MY_FILELOAD(
-	MF_SEQ INT AUTO_INCREMENT PRIMARY KEY, -- 파일 번호
-	MF_CATEGORY VARCHAR(20),  --카테고리
-	MF_TITLE VARCHAR(200) NOT NULL, --  파일명
-	MF_REGDATE TIMESTAMP DEFAULT NOW() NOT NULL, -- 작성일
-	MF_MEMO  VARCHAR(200), -- 메모
-	MF_FILE_ID VARCHAR(50) NOT NULL, -- 작성자	
-	MF_FILENAME varchar(500), --원본파일 
-	MF_NEWFILENAME varchar(500), -- 담아둘거
-
+  MF_SEQ INT AUTO_INCREMENT PRIMARY KEY, -- 파일 번호
+  MF_CATEGORY VARCHAR(20),  -- 카테고리
+  MF_TITLE VARCHAR(200) NOT NULL, --  파일명
+  MF_REGDATE TIMESTAMP DEFAULT NOW() NOT NULL, -- 작성일
+  MF_MEMO  VARCHAR(200), -- 메모
+  MF_FILE_ID VARCHAR(50) NOT NULL, -- 작성자	
+  MF_FILENAME varchar(500), -- 원본파일 
+  MF_NEWFILENAME varchar(500) -- 업로드파일
 );
 
 
