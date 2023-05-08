@@ -9,8 +9,8 @@
 	</select>
 	
 	<insert id="regiUser" parameterType="mul.cam.a.dto.LoginDto">
-		insert into user(email, name, regidate, id, social, auth, cause, token)
-		values(#{email}, "Mine 사용자", now(), #{id}, #{social}, 1, "정상적인 사용자", #{jwt})
+		insert into user(email, name, regidate, id, social, auth, cause, token, profPic, profMsg, job, birthdate, address)
+		values(#{email}, "Mine 사용자", now(), #{id}, #{social}, 1, "정상적인 사용자", #{jwt}, #{profPic}, #{profMsg}, #{job}, #{birthdate}, #{address})
 	</insert>
 	
 	<select id="getId" parameterType="String" resultType="String">
@@ -31,14 +31,14 @@
 	</select>
 	
 	<select id="showUser" parameterType="String" resultType="mul.cam.a.dto.LoginDto">
-		select email, name, regidate, id, social, auth, token
+		select *
 		from user
 		where token=#{token}
 	</select>
 	
-	<update id="editUser" parameterType="String">
+	<update id="editUser" parameterType="mul.cam.a.dto.LoginDto">
 		update user
-		set name=#{name}
+		set name=#{name}, profPic=#{profPic}, profMsg=#{profMsg}, job=#{job}, birthdate=#{birthdate}, address=#{address}
 		where token=#{token}
 	</update>
 	
@@ -55,7 +55,7 @@
 	</select>
 	
 	<select id="userList" resultType="mul.cam.a.dto.LoginDto">
-		select email, name, regidate, social, auth, cause
+		select *
 		from user
 	</select>
 </mapper>

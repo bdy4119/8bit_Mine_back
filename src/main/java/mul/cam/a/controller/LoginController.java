@@ -1,5 +1,9 @@
 package mul.cam.a.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +20,10 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -28,10 +34,13 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
+import mul.cam.a.APIS;
 import mul.cam.a.dto.KakaoToken;
 import mul.cam.a.dto.LoginDto;
 import mul.cam.a.dto.OAuthToken;
 import mul.cam.a.service.LoginService;
+import mul.cam.a.util.FileUtil;
 
 
 @RestController
@@ -161,7 +170,13 @@ public class LoginController {
 			
 			// DB에 회원등록 (id, email, jwt 등록)
 			String id = kakaotoken.getId();
-			boolean regiUserB = service.regiUser(id, email, social, jwt);
+			String profPic = null;
+			String profMsg = null;
+			String job = null;
+			String birthdate = null;
+			String address = null;
+			
+			boolean regiUserB = service.regiUser(id, email, social, jwt, profPic, profMsg, job, birthdate, address);
 			
 			if (regiUserB) {
 				System.out.println("회원 등록 성공");
@@ -247,15 +262,44 @@ public class LoginController {
 		map.put("name", dto.getName());
 		map.put("regidate", dto.getRegidate());
 		map.put("social", dto.getSocial());
-		
+		map.put("profPic", dto.getProfPic());
+		map.put("profMsg", dto.getProfMsg());
+		map.put("job", dto.getJob());
+		map.put("birthdate", dto.getBirthdate());
+		map.put("address", dto.getAddress());
+
 		// 사용자 정보 보내기
 		return map;
 	}
 	
-	@GetMapping(value = "/edit")
-	public String edit(String name, String token) {
-		// 로그인한 사용자의 이름 변경
-		boolean b = service.editUser(name, token);
+	
+	@PostMapping(value = "/edit")
+	public String edit(@RequestParam("uploadFile")MultipartFile uploadFile, HttpServletRequest req, LoginDto dto) {
+		
+		String uploadpath = req.getServletContext().getRealPath("/upload");
+		
+		String filename = uploadFile.getOriginalFilename();
+		System.out.println(filename);
+		String newfilename = FileUtil.getNewFileName(filename);
+		String filepath = uploadpath + "/" + newfilename;
+		
+		String publicpath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/profPic";
+		String publicUpload = publicpath + "/" + newfilename;
+		dto.setProfPic(newfilename);
+		
+		boolean b = service.editUser(dto);
+		
+		try {
+			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+			bos.write(uploadFile.getBytes());
+			bos.close();
+			
+			BufferedOutputStream bos2 = new BufferedOutputStream(new FileOutputStream(new File(publicUpload)));
+			bos2.write(uploadFile.getBytes());
+			bos2.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		if (b) {
 			return "수정 완료";
@@ -323,9 +367,14 @@ public class LoginController {
 		// 최초 로그인시 DB에 회원등록
 		if (emailCheckB) {
 			System.out.println("회원 등록 진행");
+			String profPic = null;
+			String profMsg = null;
+			String job = null;
+			String birthdate = null;
+			String address = null;
 			
 			// DB에 회원등록 (id, email, jwt 등록)
-			boolean regiUserB = service.regiUser(id, email, social, jwt);
+			boolean regiUserB = service.regiUser(id, email, social, jwt, profPic, profMsg, job, birthdate, address);
 			
 			if (regiUserB) {
 				System.out.println("회원 등록 성공");
@@ -378,9 +427,14 @@ public class LoginController {
 		// 최초 로그인시 DB에 회원등록
 		if (emailCheckB) {
 			System.out.println("회원 등록 진행");
+			String profPic = null;
+			String profMsg = null;
+			String job = null;
+			String birthdate = null;
+			String address = null;
 			
 			// DB에 회원등록 (id, email, jwt 등록)
-			boolean regiUserB = service.regiUser(id, email, social, jwt);
+			boolean regiUserB = service.regiUser(id, email, social, jwt, profPic, profMsg, job, birthdate, address);
 			
 			if (regiUserB) {
 				System.out.println("회원 등록 성공");

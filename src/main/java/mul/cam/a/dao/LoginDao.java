@@ -12,7 +12,8 @@ import mul.cam.a.dto.LoginDto;
 public interface LoginDao {
 	String emailCheck(String email);
 	
-	int regiUser(String id, String email, String social, String jwt);
+	int regiUser(String id, String email, String social, String jwt,
+			String profPic, String profMsg, String job, String birthdate, String address);
 	
 	String getId(String token);
 	
@@ -24,7 +25,7 @@ public interface LoginDao {
 	
 	LoginDto showUser(String token);
 	
-	int editUser(String name, String token);
+	int editUser(LoginDto dto);
 	
 	int authCheck(String token);
 	

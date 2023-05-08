@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.dao.SocialDao">
+
+<!-- 친구 조회 -->
+<select id="social_sel" parameterType="Integer" resultType="mul.cam.a.dto.SocialDto">
+	SELECT *
+	FROM SOCIAL
+	WHERE SEQ=#{seq}
+</select>
+
+<!-- 친구리스트 조회 -->
+<select id="social_list" parameterType="String" resultType="mul.cam.a.dto.SocialDto">
+	SELECT *
+	FROM SOCIAL
+	WHERE OWNER=#{owner}
+</select>
+
+<!-- 친구 추가 -->
+<insert id="social_add" parameterType="mul.cam.a.dto.SocialDto">
+	INSERT INTO SOCIAL(OWNER, FRIEND, MEMO, REGDATE)
+	VALUES (#{owner}, #{friend}, #{memo}, NOW())
+</insert>
+
+<!-- 친구 삭제 -->
+<delete id="social_del" parameterType="Integer">
+	DELETE FROM SOCIAL
+	WHERE SEQ=#{seq}
+</delete>
+
+<!-- 친구 수정 -->
+<update id="social_upd" parameterType="mul.cam.a.dto.SocialDto">
+	UPDATE SOCIAL
+	SET MEMO=#{memo}, REGDATE=NOW()
+	WHERE SEQ=#{seq}
+</update>
+
+</mapper>
