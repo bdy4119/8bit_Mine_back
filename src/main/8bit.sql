@@ -7,16 +7,14 @@ use mine;
 -----------------------태우----------------------------------
 
 CREATE TABLE MY_FILELOAD(
-	MF_SEQ INT AUTO_INCREMENT PRIMARY KEY, -- 파일 번호
-	MF_CATEGORY VARCHAR(10),  --카테고리
-	MF_TITLE VARCHAR(200) NOT NULL, --  파일명
-	MF_REGDATE TIMESTAMP DEFAULT NOW() NOT NULL, -- 작성일
-	MF_MEMO  VARCHAR(200), -- 메모
-	MF_FILE_ID VARCHAR(50) NOT NULL, -- 작성자	
-	MF_FILENAME DECIMAL(10), --원본파일 
-	MF_NEWFILENAME DECIMAL(10), -- 담아둘거
-	MF_USER_ID varchar(50)
-
+  MF_SEQ INT AUTO_INCREMENT PRIMARY KEY, -- 파일 번호
+  MF_CATEGORY VARCHAR(20),  -- 카테고리
+  MF_TITLE VARCHAR(200) NOT NULL, --  파일명
+  MF_REGDATE TIMESTAMP DEFAULT NOW() NOT NULL, -- 작성일
+  MF_MEMO  VARCHAR(200), -- 메모
+  MF_FILE_ID VARCHAR(50) NOT NULL, -- 작성자	
+  MF_FILENAME varchar(500), -- 원본파일 
+  MF_NEWFILENAME varchar(500) -- 업로드파일
 );
 
 
@@ -27,7 +25,7 @@ CREATE TABLE MY_FILELOAD(
 -- 다이어리 리스트 db
 create table calendar(
 	seq int auto_increment primary key,
-	id varchar(50) not null, 
+	id varchar(50), 
 	title varchar(200) not null,
 	content varchar(4000),
 	rdate varchar(256) not null,
@@ -35,11 +33,11 @@ create table calendar(
     del decimal(1) not null
 );
 
-
+select * from businesscard;
 -- todo리스트 db
 create table todo(
 	seq int auto_increment primary key,
-	id varchar(50) not null, 
+	id varchar(50), 
 	title varchar(200) not null,
 	content varchar(4000),
 	rdate varchar(256) not null,
@@ -51,7 +49,7 @@ create table todo(
 -- 온라인 명함 DB -------------------------------------------
 create table businesscard(
     seq int auto_increment primary key,
-	id varchar(50) not null,
+	id varchar(50),
     thumbnail varchar(4000) not null,
     introduce varchar(4000) not null,
     phoneNum varchar(255) not null,
@@ -62,11 +60,10 @@ create table businesscard(
 );
 
 
-
 -- 명함 뒷면-----
 create table businesscardBack(
 	seq int auto_increment primary key,
-    id varchar(50) not null,
+    id varchar(50),
 	historyDate varchar(200) not null, -- 수행날짜
     historyTitle varchar(2000) not null, -- 수행제목
     historyContent varchar(4000) not null, -- 수행내용
