@@ -37,4 +37,6 @@ public interface LoginDao {
 	int updateState(LoginDto dto);
 	
 	List<LoginDto> searchList(String search);
+	
+	LoginDto getDto(String email);
 }

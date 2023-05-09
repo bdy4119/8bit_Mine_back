@@ -93,4 +93,8 @@ public class LoginService {
 	public List<LoginDto> searchList(String search) {
 		return dao.searchList(search);
 	}
+	
+	public LoginDto getDto(String email) {
+		return dao.getDto(email);
+	}
 }

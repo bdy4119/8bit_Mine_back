@@ -49,7 +49,7 @@ public class LoginController {
 	LoginService service;
 	
 	@GetMapping(value = "/callback/kakao")
-	public String kakaologin(String code) {
+	public LoginDto kakaologin(String code) {
 		String social = "kakao";
 		
 		// 인가 코드 출력
@@ -189,6 +189,10 @@ public class LoginController {
 			System.out.println("회원 존재");
 		}
 		
+		// 이메일로 dto 불러오기
+		LoginDto dto = service.getDto(email);
+		System.out.println(dto);
+		
 		// id값으로 DB에서 jwt값 불러오기
 		String userJwt = service.getJwt(email);
 		
@@ -196,7 +200,9 @@ public class LoginController {
 		System.out.println("회원 JWT: " + userJwt);
 		
 		// json web token 프론트엔드로 전달
-		return userJwt;
+		//return userJwt;
+		
+		return dto;
 	}
 	
 	@PostMapping(value = "/withdrawal")
@@ -363,7 +369,7 @@ public class LoginController {
 	}
 	
 	@GetMapping(value = "/callback/google")
-	public String googlelogin(String id, String email) {
+	public LoginDto googlelogin(String id, String email) {
 		String social = "google";
 		
 		// 사용자 정보 출력
@@ -412,6 +418,10 @@ public class LoginController {
 			System.out.println("회원 존재");
 		}
 		
+		// 이메일로 dto 불러오기
+		LoginDto dto = service.getDto(email);
+		System.out.println(dto);
+		
 		// id값으로 DB에서 jwt값 불러오기
 		String userJwt = service.getJwt(email);
 		
@@ -419,11 +429,13 @@ public class LoginController {
 		System.out.println("회원 JWT: " + userJwt);
 		
 		// json web token 프론트엔드로 전달
-		return userJwt;
+		//return userJwt;
+		
+		return dto;
 	}
 	
 	@GetMapping(value = "/callback/microsoft")
-	public String microsoftlogin(String id, String email) {
+	public LoginDto microsoftlogin(String id, String email) {
 		String social = "microsoft";
 		
 		// 사용자 정보 출력
@@ -472,6 +484,10 @@ public class LoginController {
 			System.out.println("회원 존재");
 		}
 		
+		// 이메일로 dto 불러오기
+		LoginDto dto = service.getDto(email);
+		System.out.println(dto);
+		
 		// id값으로 DB에서 jwt값 불러오기
 		String userJwt = service.getJwt(email);
 		
@@ -479,7 +495,9 @@ public class LoginController {
 		System.out.println("회원 JWT: " + userJwt);
 		
 		// json web token 프론트엔드로 전달
-		return userJwt;
+		//return userJwt;
+		
+		return dto;
 	}
 	
 	@GetMapping(value = "/userlist")
@@ -506,7 +524,7 @@ public class LoginController {
 	}
 	
 	@GetMapping(value = "/callback/naver")
-	public String naverlogin(String email) {
+	public LoginDto naverlogin(String email) {
 		String social = "naver";
 		// naver는 id값이 따로 없음
 		String id = "0123456789";
@@ -556,6 +574,10 @@ public class LoginController {
 			System.out.println("회원 존재");
 		}
 		
+		// 이메일로 dto 불러오기
+		LoginDto dto = service.getDto(email);
+		System.out.println(dto);
+		
 		// 이메일값으로 DB에서 jwt값 불러오기
 		String userJwt = service.getJwt(email);
 		
@@ -563,7 +585,9 @@ public class LoginController {
 		System.out.println("회원 JWT: " + userJwt);
 		
 		// json web token 프론트엔드로 전달
-		return userJwt;
+		//return userJwt;
+		
+		return dto;
 	}
 	
 	@GetMapping(value = "/searchlist")

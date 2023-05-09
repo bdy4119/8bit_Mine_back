@@ -82,4 +82,10 @@
 		from user
 		where email like concat('%', #{search}, '%')
 	</select>
+	
+	<select id="getDto" parameterType="String" resultType="mul.cam.a.dto.LoginDto">
+		select *
+		from user
+		where email=#{email}
+	</select>
 </mapper>
