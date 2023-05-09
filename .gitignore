@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 src/main/java/mul/cam/a/APIKEY.java
+src/main/java/mul/cam/a/util/APISECRET.java
 
 ### STS ###
 .apt_generated
