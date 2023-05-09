@@ -29,7 +29,7 @@
 </select>		
 		
 <!--글의총수  -->	
-<select id="getAllfile" parameterType="mul.cam.a.dto.FileloadParam" resultType="mul.cam.a.dto.FileloadDto">
+<select id="getAllfile" parameterType="mul.cam.a.dto.FileloadParam" resultType="Integer">
 	
 	select ifnull(count(*), 0)
 	from MY_FILELOAD

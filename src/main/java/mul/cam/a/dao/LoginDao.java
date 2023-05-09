@@ -10,6 +10,7 @@ import mul.cam.a.dto.LoginDto;
 @Mapper
 @Repository
 public interface LoginDao {
+	
 	String emailCheck(String email);
 	
 	int regiUser(String id, String email, String social, String jwt,
@@ -26,6 +27,8 @@ public interface LoginDao {
 	LoginDto showUser(String token);
 	
 	int editUser(LoginDto dto);
+	int editUser_n(LoginDto dto);
+	int editUser_nc(LoginDto dto);
 	
 	int authCheck(String token);
 	

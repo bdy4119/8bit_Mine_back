@@ -64,6 +64,18 @@ public class LoginService {
 		return i>0?true:false;
 	}
 	
+	public boolean editUser_n(LoginDto dto) {
+		int i = dao.editUser_n(dto);
+		
+		return i>0?true:false;
+	}
+	
+	public boolean editUser_nc(LoginDto dto) {
+		int i = dao.editUser_nc(dto);
+		
+		return i>0?true:false;
+	}
+	
 	public int authCheck(String token) {
 		return dao.authCheck(token);
 	}

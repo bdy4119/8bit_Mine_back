@@ -275,7 +275,7 @@ public class LoginController {
 	
 	@PostMapping(value = "/edit")
 	public String edit(@RequestParam("uploadFile")MultipartFile uploadFile, HttpServletRequest req, LoginDto dto) {
-		
+		System.out.println("edit");
 		String uploadpath = req.getServletContext().getRealPath("/upload");
 		
 		String filename = uploadFile.getOriginalFilename();
@@ -300,6 +300,31 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		if (b) {
+			return "수정 완료";
+		}
+		
+		return "오류 발생";
+	}
+	
+	@GetMapping(value = "/edit_n")
+	public String edit_n(LoginDto dto) {
+		System.out.println("editn");
+		System.out.println(dto.toString());
+		boolean b = service.editUser_n(dto);
+		
+		if (b) {
+			return "수정 완료";
+		}
+		
+		return "오류 발생";
+	}
+	
+	@GetMapping(value = "/edit_nc")
+	public String edit_nc(LoginDto dto) {
+		System.out.println("editnc");
+		boolean b = service.editUser_nc(dto);
 		
 		if (b) {
 			return "수정 완료";
