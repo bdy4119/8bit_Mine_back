@@ -42,6 +42,18 @@
 		where token=#{token}
 	</update>
 	
+	<update id="editUser_n" parameterType="mul.cam.a.dto.LoginDto">
+		update user
+		set name=#{name}, profPic="logo.png", profMsg=#{profMsg}, job=#{job}, birthdate=#{birthdate}, address=#{address}
+		where token=#{token}
+	</update>
+	
+	<update id="editUser_nc" parameterType="mul.cam.a.dto.LoginDto">
+		update user
+		set name=#{name}, profMsg=#{profMsg}, job=#{job}, birthdate=#{birthdate}, address=#{address}
+		where token=#{token}
+	</update>
+
 	<select id="jwtCheck" parameterType="String" resultType="String">
 		select token
 		from user
