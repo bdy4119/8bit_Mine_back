@@ -24,8 +24,6 @@ public class NaverCloud {
 	    String chatbotMessage = "";
 	
 	    try {
-	        //String apiURL = "https://ex9av8bv0e.apigw.ntruss.com/custom_chatbot/prod/";
-	
 	        URL url = new URL(apiURL);
 	
 	        String message = getReqMessage(voiceMessage);
@@ -110,7 +108,7 @@ public class NaverCloud {
             System.out.println("##"+timestamp);
 
             obj.put("version", "v2");
-            obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");
+            obj.put("userId", APISECRET.chatbot_userID);
 //=> userId is a unique code for each chat user, not a fixed value, recommend use UUID. use different id for each user could help you to split chat history for users.
 
             obj.put("timestamp", timestamp);
