@@ -18,8 +18,8 @@ public class NaverCloud {
 	
 	public static String chatBot(String voiceMessage) {
 		
-		String apiURL = "https://oxck6ogga8.apigw.ntruss.com/custom/v1/9906/e4e87b1afdeed2a602e11a90ad1bd11a2bcf18458d1d41f9253bd3d8b71f82bc";
-		String secretKey = "Q3ducEtGeVFDQ25ua0dRTktGZ3dmWWFQenltSWJFc2M=";
+		String apiURL = "https://ry4g6s6aar.apigw.ntruss.com/custom/v1/10396/975479f1cbcbb2741134e895a1c12d1b35c4cabebea0f0c8b48f4583aa635890";
+		String secretKey = "cG9qdnhSVXNJRUZZcmlhcHRxaUxaTEJ1dlRXRHh6UEY=";
 
 	    String chatbotMessage = "";
 	
