@@ -242,7 +242,7 @@ public class APIS {
 		return jo;
 	}
 
-	// ChatGPT : Youtube URL에서 가수/노래 제목 구분 (1분에 3번 호출 가능 / Free trial 넘어가면 pay)
+	// ChatGPT : Youtube URL에서 가수/노래 제목 구분
 	public static String ChatGptBgm(String prompt, float temperature, int maxTokens) throws Exception {
 
 		String API_KEY = APIKEY.gpt_Key;
@@ -278,5 +278,7 @@ public class APIS {
 		}
 
 	}
+	
+	
 
 }
