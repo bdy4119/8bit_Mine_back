@@ -49,7 +49,7 @@ public class LoginController {
 	LoginService service;
 	
 	@GetMapping(value = "/callback/kakao")
-	public String kakaologin(String code) {
+	public LoginDto kakaologin(String code) {
 		String social = "kakao";
 		
 		// 인가 코드 출력
@@ -189,6 +189,10 @@ public class LoginController {
 			System.out.println("회원 존재");
 		}
 		
+		// 이메일로 dto 불러오기
+		LoginDto dto = service.getDto(email);
+		System.out.println(dto);
+		
 		// id값으로 DB에서 jwt값 불러오기
 		String userJwt = service.getJwt(email);
 		
@@ -196,7 +200,9 @@ public class LoginController {
 		System.out.println("회원 JWT: " + userJwt);
 		
 		// json web token 프론트엔드로 전달
-		return userJwt;
+		//return userJwt;
+		
+		return dto;
 	}
 	
 	@PostMapping(value = "/withdrawal")
@@ -275,7 +281,7 @@ public class LoginController {
 	
 	@PostMapping(value = "/edit")
 	public String edit(@RequestParam("uploadFile")MultipartFile uploadFile, HttpServletRequest req, LoginDto dto) {
-		
+		System.out.println("edit");
 		String uploadpath = req.getServletContext().getRealPath("/upload");
 		
 		String filename = uploadFile.getOriginalFilename();
@@ -300,6 +306,31 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		if (b) {
+			return "수정 완료";
+		}
+		
+		return "오류 발생";
+	}
+	
+	@GetMapping(value = "/edit_n")
+	public String edit_n(LoginDto dto) {
+		System.out.println("editn");
+		System.out.println(dto.toString());
+		boolean b = service.editUser_n(dto);
+		
+		if (b) {
+			return "수정 완료";
+		}
+		
+		return "오류 발생";
+	}
+	
+	@GetMapping(value = "/edit_nc")
+	public String edit_nc(LoginDto dto) {
+		System.out.println("editnc");
+		boolean b = service.editUser_nc(dto);
 		
 		if (b) {
 			return "수정 완료";
@@ -338,7 +369,7 @@ public class LoginController {
 	}
 	
 	@GetMapping(value = "/callback/google")
-	public String googlelogin(String id, String email) {
+	public LoginDto googlelogin(String id, String email) {
 		String social = "google";
 		
 		// 사용자 정보 출력
@@ -387,6 +418,10 @@ public class LoginController {
 			System.out.println("회원 존재");
 		}
 		
+		// 이메일로 dto 불러오기
+		LoginDto dto = service.getDto(email);
+		System.out.println(dto);
+		
 		// id값으로 DB에서 jwt값 불러오기
 		String userJwt = service.getJwt(email);
 		
@@ -394,11 +429,13 @@ public class LoginController {
 		System.out.println("회원 JWT: " + userJwt);
 		
 		// json web token 프론트엔드로 전달
-		return userJwt;
+		//return userJwt;
+		
+		return dto;
 	}
 	
 	@GetMapping(value = "/callback/microsoft")
-	public String microsoftlogin(String id, String email) {
+	public LoginDto microsoftlogin(String id, String email) {
 		String social = "microsoft";
 		
 		// 사용자 정보 출력
@@ -447,6 +484,10 @@ public class LoginController {
 			System.out.println("회원 존재");
 		}
 		
+		// 이메일로 dto 불러오기
+		LoginDto dto = service.getDto(email);
+		System.out.println(dto);
+		
 		// id값으로 DB에서 jwt값 불러오기
 		String userJwt = service.getJwt(email);
 		
@@ -454,12 +495,104 @@ public class LoginController {
 		System.out.println("회원 JWT: " + userJwt);
 		
 		// json web token 프론트엔드로 전달
-		return userJwt;
+		//return userJwt;
+		
+		return dto;
 	}
 	
 	@GetMapping(value = "/userlist")
 	public Map<String, Object> userlist(){
 		List<LoginDto> list = service.userList();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	@GetMapping(value = "/updateState")
+	public String updateState(LoginDto dto) {
+		System.out.println(dto);
+		
+		boolean b = service.updateState(dto);
+		
+		if (b) {
+			return "success";
+		}
+		
+		return "error";
+	}
+	
+	@GetMapping(value = "/callback/naver")
+	public LoginDto naverlogin(String email) {
+		String social = "naver";
+		// naver는 id값이 따로 없음
+		String id = "0123456789";
+		
+		// 사용자 정보 출력
+		System.out.println("이메일: " + email);
+		
+		// 서버 jwt 발행 (pom.xml에 jwt 세팅 필요)
+		// jwt 안에 회원의 아이디 정보 넣기
+		String jsonstring = email;
+		
+		// 암호키 (256비트 이상)
+		String secretkey = "secretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkeysecretkey";
+		
+		String jwt = Jwts.builder()
+				.setSubject(jsonstring)
+				//.setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) // 유효기간 1H
+				.signWith(SignatureAlgorithm.HS256, secretkey)
+				.compact();
+		
+		// jwt 출력
+		System.out.println("JWT: " + jwt);
+		
+		// 가입 여부 체크
+		boolean emailCheckB = service.emailCheck(email);
+
+		// 최초 로그인시 DB에 회원등록
+		if (emailCheckB) {
+			System.out.println("회원 등록 진행");
+			String profPic = null;
+			String profMsg = null;
+			String job = null;
+			String birthdate = null;
+			String address = null;
+			
+			// DB에 회원등록 (id, email, jwt 등록)
+			boolean regiUserB = service.regiUser(id, email, social, jwt, profPic, profMsg, job, birthdate, address);
+			
+			if (regiUserB) {
+				System.out.println("회원 등록 성공");
+			}
+			else {
+				System.out.println("회원 등록 실패");
+			}
+		}
+		else {
+			System.out.println("회원 존재");
+		}
+		
+		// 이메일로 dto 불러오기
+		LoginDto dto = service.getDto(email);
+		System.out.println(dto);
+		
+		// 이메일값으로 DB에서 jwt값 불러오기
+		String userJwt = service.getJwt(email);
+		
+		// 로그인한 회원의 jwt값 출력
+		System.out.println("회원 JWT: " + userJwt);
+		
+		// json web token 프론트엔드로 전달
+		//return userJwt;
+		
+		return dto;
+	}
+	
+	@GetMapping(value = "/searchlist")
+	public Map<String, Object> searchlist(String search){
+		List<LoginDto> list = service.searchList(search);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list);

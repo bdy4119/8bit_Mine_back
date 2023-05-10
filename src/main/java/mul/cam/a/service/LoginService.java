@@ -64,11 +64,37 @@ public class LoginService {
 		return i>0?true:false;
 	}
 	
+	public boolean editUser_n(LoginDto dto) {
+		int i = dao.editUser_n(dto);
+		
+		return i>0?true:false;
+	}
+	
+	public boolean editUser_nc(LoginDto dto) {
+		int i = dao.editUser_nc(dto);
+		
+		return i>0?true:false;
+	}
+	
 	public int authCheck(String token) {
 		return dao.authCheck(token);
 	}
 	
 	public List<LoginDto> userList() {
 		return dao.userList();
+	}
+	
+	public boolean updateState(LoginDto dto) {
+		int i = dao.updateState(dto);
+		
+		return i>0?true:false;
+	}
+	
+	public List<LoginDto> searchList(String search) {
+		return dao.searchList(search);
+	}
+	
+	public LoginDto getDto(String email) {
+		return dao.getDto(email);
 	}
 }

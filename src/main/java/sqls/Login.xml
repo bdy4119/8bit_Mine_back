@@ -42,6 +42,18 @@
 		where token=#{token}
 	</update>
 	
+	<update id="editUser_n" parameterType="mul.cam.a.dto.LoginDto">
+		update user
+		set name=#{name}, profPic="logo.png", profMsg=#{profMsg}, job=#{job}, birthdate=#{birthdate}, address=#{address}
+		where token=#{token}
+	</update>
+	
+	<update id="editUser_nc" parameterType="mul.cam.a.dto.LoginDto">
+		update user
+		set name=#{name}, profMsg=#{profMsg}, job=#{job}, birthdate=#{birthdate}, address=#{address}
+		where token=#{token}
+	</update>
+
 	<select id="jwtCheck" parameterType="String" resultType="String">
 		select token
 		from user
@@ -57,5 +69,23 @@
 	<select id="userList" resultType="mul.cam.a.dto.LoginDto">
 		select *
 		from user
+	</select>
+	
+	<update id="updateState" parameterType="mul.cam.a.dto.LoginDto">
+		update user
+		set auth=#{auth}, cause=#{cause}
+		where email=#{email}
+	</update>
+	
+	<select id="searchList" parameterType="String" resultType="mul.cam.a.dto.LoginDto">
+		select *
+		from user
+		where email like concat('%', #{search}, '%')
+	</select>
+	
+	<select id="getDto" parameterType="String" resultType="mul.cam.a.dto.LoginDto">
+		select *
+		from user
+		where email=#{email}
 	</select>
 </mapper>

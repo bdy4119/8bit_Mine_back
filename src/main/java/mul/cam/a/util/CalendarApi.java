@@ -20,7 +20,7 @@ public class CalendarApi {
 		String month = "";
         StringBuilder sb = new StringBuilder();	//리턴값
         try {
-			urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + URLEncoder.encode("woiKKUFr+TCHJP50gk2IzIcuggzz7znPyy7IHHX+/m6n7UBpkpiW363XfuNKvna7QyZcQl4uu2PZbwTAmrnM9Q==", "UTF-8"));
+			urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + URLEncoder.encode(APISECRET.calendar_Secret, "UTF-8"));
 			/*Service Key*/
 	        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
 	        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("365", "UTF-8")); /*한 페이지 결과 수*/
