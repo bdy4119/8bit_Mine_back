@@ -69,7 +69,7 @@ public class FileloadController {
 
 		return fileList;
 
-	}
+	} // 글의 총수
 	@GetMapping("getAllfile")
 	public int getAllfile() {
 		System.out.println("FileloadController getAllfile() : " + new Date());
@@ -78,14 +78,14 @@ public class FileloadController {
 	}
 	
 	
-	
+	// 상세 페이지
 	@GetMapping("fileDetail")
 	public FileloadDto fileDetail(int mfSeq) {
 		System.out.println(mfSeq);
 		return service.fileDetail(mfSeq);
 	}
 	
-
+	// 파일 삭제
 	@GetMapping("deleteFile")
 	public String deleteFile(int mfSeq) {
 		System.out.println("FileloadController deleteFile() : " + new Date());
@@ -98,21 +98,15 @@ public class FileloadController {
 	}
 
 
-//	@GetMapping("updateFile")
-//	public String updateFile(int mfSeq) {
-//		System.out.println("FileloadController updateFile() : " + new Date());
-//		
-//		
-//		return service.updateFile(mfSeq);
-
-//	}
 
 
 
-
+	// 파일 upload
 	@PostMapping("/uploadFile")
 	public String uploadFile(FileloadDto dto, @RequestParam("fileLoad") MultipartFile fileLoad, HttpServletRequest req)
 			throws IOException {
+		
+		System.out.println(dto.toString());
 
 		// req.getServletContext() 웹경로
 		String path = req.getServletContext().getRealPath("/upload");
@@ -132,12 +126,11 @@ public class FileloadController {
 	}
 
 	
-
-	
+	// 파일 download
 	@Autowired
 	ServletContext servletcontext;
 	
-	@PostMapping(value = "downFile")
+	@GetMapping(value = "downFile")
 	public ResponseEntity<InputStreamResource> download(String filename, HttpServletRequest req) throws Exception {
 	
 		System.out.println("fileloadController fileDownload() : " + new Date());
@@ -159,8 +152,4 @@ public class FileloadController {
 	}
 
 
-
-
 } // end of FileloadController
-
-	

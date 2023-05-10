@@ -22,10 +22,6 @@ public class FileloadService {
 	}
 
 
-//	public int getAllfile(FileloadParam Param) {
-//		return dao.getAllfile(Param);
-//	}
-
 	public int getAllfile() {
 		return dao.getAllfile();
 	}
@@ -48,4 +44,3 @@ public class FileloadService {
 		return dao.fileDetail(mfSeq);
 	}
 	}
-
