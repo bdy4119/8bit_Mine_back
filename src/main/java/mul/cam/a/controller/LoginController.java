@@ -289,7 +289,12 @@ public class LoginController {
 		String newfilename = FileUtil.getNewFileName(filename);
 		String filepath = uploadpath + "/" + newfilename;
 		
-		String publicpath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/profPic";
+//		String publicpath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/profPic";
+		
+		//다연 경로
+		String publicpath = "C:\\Users\\PC\\Desktop\\_multicam\\_final-project\\_react-front\\8bit_Mine_Front\\public\\profPic";
+
+		
 		String publicUpload = publicpath + "/" + newfilename;
 		dto.setProfPic(newfilename);
 		

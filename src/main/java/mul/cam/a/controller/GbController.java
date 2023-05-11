@@ -78,7 +78,10 @@ public class GbController {
 		String filename = System.currentTimeMillis() + ".wav";
 		String filepath = uploadpath + "/" + filename;
 		
-		String publicpath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/voice";
+	//	String publicpath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/voice";
+		
+		//다연 경로
+		String publicpath = "C:\\\\Users\\PC\\Desktop\\_multicam\\_final-project\\_react-front\\8bit_Mine_Front\\public\\voice";
 		String publicUpload = publicpath + "/" + filename;
 		
 		try {
