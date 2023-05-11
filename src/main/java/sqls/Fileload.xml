@@ -92,8 +92,6 @@ values(#{mfCategory}, #{mfTitle}, #{mfMemo}, #{mfFileId},#{mfFilename},#{mfNFile
 	where MF_SEQ=#{mfSeq}
 </select>
 
-
-
 	
 
 </mapper>
