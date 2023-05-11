@@ -170,7 +170,7 @@ public class LoginController {
 			
 			// DB에 회원등록 (id, email, jwt 등록)
 			String id = kakaotoken.getId();
-			String profPic = "logo";
+			String profPic = "logo.png";
 			String profMsg = null;
 			String job = null;
 			String birthdate = null;
@@ -398,7 +398,7 @@ public class LoginController {
 		// 최초 로그인시 DB에 회원등록
 		if (emailCheckB) {
 			System.out.println("회원 등록 진행");
-			String profPic = "logo";
+			String profPic = "logo.png";
 			String profMsg = null;
 			String job = null;
 			String birthdate = null;
@@ -464,7 +464,7 @@ public class LoginController {
 		// 최초 로그인시 DB에 회원등록
 		if (emailCheckB) {
 			System.out.println("회원 등록 진행");
-			String profPic = "logo";
+			String profPic = "logo.png";
 			String profMsg = null;
 			String job = null;
 			String birthdate = null;
@@ -554,7 +554,7 @@ public class LoginController {
 		// 최초 로그인시 DB에 회원등록
 		if (emailCheckB) {
 			System.out.println("회원 등록 진행");
-			String profPic = "logo";
+			String profPic = "logo.png";
 			String profMsg = null;
 			String job = null;
 			String birthdate = null;

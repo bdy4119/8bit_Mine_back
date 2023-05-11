@@ -1,10 +1,26 @@
--- mine DB생성
-create database mine;
+drop table MY_FILELOAD;
+drop table calendar;
+drop table todo;
+drop table businesscard;
+drop table businesscardBack;
+drop table mine_mine;
+drop table mine_answer;
+drop table user;
+drop table report;
+drop table MINE_I;
+drop table BGM;
+drop table MINE_CLASSI;
+drop table MINE_10QNA;
+drop table GUESTBOOK;
+drop table friend;
 
 
--- mine DB 사용
-use mine;
------------------------태우----------------------------------
+CREATE TABLE friend(
+	seq int auto_increment primary key,
+	id varchar(100), 
+    friendid varchar(100)
+);
+
 
 CREATE TABLE MY_FILELOAD(
   MF_SEQ INT AUTO_INCREMENT PRIMARY KEY, -- 파일 번호
@@ -18,27 +34,23 @@ CREATE TABLE MY_FILELOAD(
 );
 
 
------------------------태우----------------------------------
-
-
 -- -------------------다연 ------------------------------------------------------------------------------------
 -- 다이어리 리스트 db
 create table calendar(
 	seq int auto_increment primary key,
-	id varchar(50), 
+	id varchar(100), 
 	title varchar(200) not null,
-        thumbnail varchar(4000), -- 안되면 지우기
+	thumbnail varchar(4000), -- 안되면 지우기
 	content varchar(4000),
 	rdate varchar(256) not null,
 	wdate timestamp not null,
     del decimal(1) not null
 );
 
-select * from businesscard;
--- todo리스트 db
+
 create table todo(
 	seq int auto_increment primary key,
-	id varchar(50), 
+	id varchar(100), 
 	title varchar(200) not null,
 	content varchar(4000),
 	rdate varchar(256) not null,
@@ -50,7 +62,7 @@ create table todo(
 -- 온라인 명함 DB -------------------------------------------
 create table businesscard(
     seq int auto_increment primary key,
-	id varchar(50),
+	id varchar(100),
     thumbnail varchar(4000) not null,
     introduce varchar(4000) not null,
     phoneNum varchar(255) not null,
@@ -64,7 +76,7 @@ create table businesscard(
 -- 명함 뒷면-----
 create table businesscardBack(
 	seq int auto_increment primary key,
-    id varchar(50),
+    id varchar(100),
 	historyDate varchar(200) not null, -- 수행날짜
     historyTitle varchar(2000) not null, -- 수행제목
     historyContent varchar(4000) not null, -- 수행내용
@@ -72,15 +84,12 @@ create table businesscardBack(
     wdate timestamp not null
 );
 
--- -------------------다연 ------------------------------------------------------------------------------------
-
-
 
 
 -- mine 이미지와 텍스트 저장
 create table mine_mine(
     seq int auto_increment primary key,
-    id varchar(50) not null, 
+    id varchar(100) not null, 
     position int not null,
     filename varchar(50) not null,	-- 원본 파일명
     newfilename varchar(50) not null, -- 업로드 파일명
@@ -90,26 +99,18 @@ create table mine_mine(
 -- mine 방명록
 create table mine_answer(
     seq int auto_increment primary key,
-    userid varchar(50) not null, -- 작성자
-    mineid varchar(50) not null, -- 마인 주인
+    userid varchar(100) not null, -- 작성자
+    mineid varchar(100) not null, -- 마인 주인
     answer1 varchar(500) not null,
     answer2 varchar(500) not null,
     answer3 varchar(500) not null
 );
 
-
-
-
-
-
-
--- -------------------인서 ------------------------------------------------------------------------------------
-
 create table user(
 	email varchar(100) primary key,
 	name varchar(50) not null,
 	regidate timestamp not null,
-	id varchar(50),
+	id varchar(100),
 	social varchar(50),
 	auth int,
 	cause varchar(100),
@@ -122,7 +123,7 @@ create table user(
 );
 
 create table report(
-seq int primary key auto_increment
+seq int primary key auto_increment,
 informant varchar(20) not null,
 suspect varchar(20) not null,
 report_cause varchar(100) not null,
@@ -132,12 +133,9 @@ report_date timestamp not null,
 report_state varchar(50) default "checking"
 );
 
--- -------------------인서 ------------------------------------------------------------------------------------
-
-------------------------------------------준----------------------------------------------------------------
 CREATE TABLE MINE_I(
 SEQ INT AUTO_INCREMENT PRIMARY KEY,
-ID VARCHAR(20) NOT NULL,
+ID VARCHAR(100) NOT NULL,
 CLASSIFY VARCHAR(30) NOT NULL,
 ITEM VARCHAR(50),
 DETAIL VARCHAR(50),
@@ -146,7 +144,7 @@ REF INT
 
 CREATE TABLE BGM(
 SEQ INT AUTO_INCREMENT PRIMARY KEY,
-ID VARCHAR(20),
+ID VARCHAR(100),
 ARTIST VARCHAR(30),
 TITLE VARCHAR(30),
 URL VARCHAR(50)
@@ -154,13 +152,13 @@ URL VARCHAR(50)
 
 CREATE TABLE MINE_CLASSI(
 SEQ INT AUTO_INCREMENT PRIMARY KEY,
-ID VARCHAR(20) NOT NULL,
+ID VARCHAR(100) NOT NULL,
 CLASSIFY VARCHAR(30) NOT NULL,
 REF INT
 );
 
 CREATE TABLE MINE_10QNA(
-ID VARCHAR(20) PRIMARY KEY,
+ID VARCHAR(100) PRIMARY KEY,
 Q1 VARCHAR(100),
 Q2 VARCHAR(100),
 Q3 VARCHAR(100),
@@ -175,10 +173,10 @@ Q10 VARCHAR(100)
 
 CREATE TABLE GUESTBOOK(
 SEQ INT AUTO_INCREMENT PRIMARY KEY,
-TOID VARCHAR(20),
-TONAME VARCHAR(20),
-FROMID VARCHAR(20),
-FROMNAME VARCHAR(20),
+TOID VARCHAR(100),
+TONAME VARCHAR(50),
+FROMID VARCHAR(100),
+FROMNAME VARCHAR(50),
 COMMENT VARCHAR(50),
 REF INT,
 STEP INT,
@@ -186,7 +184,3 @@ ISVOICE INT,
 FILENAME VARCHAR(30),
 REGDATE TIMESTAMP
 );
-
-
------------------------------------------------------------------------------------------------------------
-
