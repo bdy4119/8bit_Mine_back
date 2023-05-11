@@ -167,26 +167,13 @@ public class BusinessController {
 			//기본파일명 -> 시간파일명
 			//파일이 없을 경우 아래 코드들 실행되면 안됨
 			String filename = uploadFile.getOriginalFilename();
-			String filepath = "C:/react/8bit_Mine_Front/public/Business-img/" + filename;	//실제경로 + 원본파일명	
-			
-			//다연 경로
-//			String filepath = "C:\\Users\\PC\\Desktop\\_multicam\\_final-project\\_react-front\\8bit_Mine_Front\\public\\Business-img\\" + filename;	//실제경로 + 원본파일명
-			
+			String filepath = Privatepath.bcPath + filename;	//실제경로 + 원본파일명	
 			System.out.println(filepath);
-			
-//			String publicpath = "C:\\Users\\PC\\Desktop\\_multicam\\_final-project\\_react-front\\8bit_Mine_Front\\public\\Business-img";
-//			String publicUpload = publicpath + "\\" + filename;
-			
-		//	System.out.println(publicUpload);
 			
 			try {
 				BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
 				bos.write(uploadFile.getBytes());
 				bos.close(); //꼭 닫아주기!
-				
-//				BufferedOutputStream bos2 = new BufferedOutputStream(new FileOutputStream(new File(publicUpload)));
-//				bos2.write(uploadFile.getBytes());
-//				bos2.close();
 			} catch (Exception e) {
 				return "file upload fail";
 			}
