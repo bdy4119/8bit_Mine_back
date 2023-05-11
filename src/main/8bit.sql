@@ -10,7 +10,7 @@ drop table report;
 drop table MINE_I;
 drop table BGM;
 drop table MINE_CLASSI;
-drop table MINE_10QNA;
+drop table MINE_7QNA;
 drop table GUESTBOOK;
 drop table friend;
 
