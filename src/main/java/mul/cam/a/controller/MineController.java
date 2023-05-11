@@ -174,11 +174,7 @@ public class MineController {
 		
 		System.out.println(mine.toString());
 		
-//		 String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/img/" + newfilename;
-//		String filepath = "C:/react/8bit_Mine_Front/public/img/" + newfilename;
-		
-		//다연 경로
-		String filepath = "C:\\Users\\PC\\Desktop\\_multicam\\_final-project\\_react-front\\8bit_Mine_Front\\public\\img\\" + newfilename;
+		 String filepath = Privatepath.micPath + newfilename;
 		
 		File file = new File(filepath);
 		
@@ -214,8 +210,7 @@ public class MineController {
 		
 		System.out.println(mine.toString());
 		
-		 String filepath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/img/" + newfilename;
-//		String filepath = "C:/react/8bit_Mine_Front/public/img/" + newfilename;
+		String filepath = Privatepath.micPath + newfilename;
 		File file = new File(filepath);
 		
 		try {

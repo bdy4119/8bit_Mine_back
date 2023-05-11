@@ -15,7 +15,7 @@ public interface GbDao {
 	int gb_add(GbDto dto);
 	
 	List<GbDto> gb_list(String id);
-	List<GbDto> gb_visit(String id);
+	List<GbDto> gb_visit(GbDto dto);
 	GbDto gb_detail(int seq);
 	
 	int gb_upd(GbDto dto);

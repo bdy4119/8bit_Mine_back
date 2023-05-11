@@ -22,10 +22,10 @@
 </select>
 
 <!-- 내가 작성한 방명록 -->
-<select id="gb_visit" parameterType="String" resultType="mul.cam.a.dto.GbDto">
+<select id="gb_visit" parameterType="mul.cam.a.dto.GbDto" resultType="mul.cam.a.dto.GbDto">
 	SELECT *
 	FROM GUESTBOOK
-	WHERE FROMID=#{id}
+	WHERE TOID=#{toid} and FROMID=#{fromid}
 </select>
 
 <!-- 수정하려면 먼저 디테일 불러서 세팅해놓고 -->
