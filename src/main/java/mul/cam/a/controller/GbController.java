@@ -36,10 +36,10 @@ public class GbController {
 	}
 	
 	@GetMapping(value = "gb_visit")
-	public List<GbDto> gb_visit(String id) {
+	public List<GbDto> gb_visit(GbDto dto) {
 		System.out.println("GbController gb_visit() : " + new Date());
 
-		return service.gb_visit(id);
+		return service.gb_visit(dto);
 	}
 	
 	@GetMapping(value = "gb_upd")
@@ -78,7 +78,7 @@ public class GbController {
 		String filename = System.currentTimeMillis() + ".wav";
 		String filepath = uploadpath + "/" + filename;
 		
-		String publicpath = "C:/Final_MINE_FRONT/8bit_Mine_Front/public/voice";
+		String publicpath = "C:/react/8bit_Mine_Front/public/voice";
 		String publicUpload = publicpath + "/" + filename;
 		
 		try {

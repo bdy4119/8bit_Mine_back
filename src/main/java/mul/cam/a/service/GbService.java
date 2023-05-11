@@ -25,8 +25,8 @@ public class GbService {
 		return dao.gb_list(id);
 	}
 	
-	public List<GbDto> gb_visit(String id) {
-		return dao.gb_visit(id);
+	public List<GbDto> gb_visit(GbDto dto) {
+		return dao.gb_visit(dto);
 	}
 	
 	public GbDto gb_detail(int seq) {
