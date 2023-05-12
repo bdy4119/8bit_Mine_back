@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import mul.cam.a.dao.MineDao;
 import mul.cam.a.dto.MineAnswerDto;
 import mul.cam.a.dto.MineDto;
+import mul.cam.a.dto.NoticeDto;
 
 @Service
 @Transactional
@@ -88,6 +89,35 @@ public class MineService {
 	
 	public boolean deleteanswer(int seq) {
 		int n = dao.deleteanswer(seq);
+		
+		return n>0?true:false;
+	}
+	
+	
+	public boolean checknotice(String id) {
+		int n = dao.checknotice(id);
+		
+		return n>0?true:false;
+	}
+	
+	public boolean insertnotice(String id) {
+		int n = dao.insertnotice(id);
+		
+		return n>0?true:false;
+	}
+	
+	public int answernum(String id) {
+
+		return dao.answernum(id);
+	}
+	
+	public int noticenum(String id) {
+
+		return dao.noticenum(id);
+	}
+	
+	public boolean noticemineupdate(NoticeDto dto) {
+		int n = dao.noticemineupdate(dto);
 		
 		return n>0?true:false;
 	}

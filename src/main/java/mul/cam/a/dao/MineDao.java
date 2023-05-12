@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import mul.cam.a.dto.MineAnswerDto;
 import mul.cam.a.dto.MineDto;
+import mul.cam.a.dto.NoticeDto;
 import mul.cam.a.dto.MineDto;
 
 @Mapper
@@ -39,4 +40,15 @@ public interface MineDao {
 	
 	int deleteanswer(int seq);
 
+	
+	
+	int checknotice(String id);
+	
+	int insertnotice(String id);
+	
+	int answernum(String id);
+	
+	int noticenum(String id);
+	
+	int noticemineupdate(NoticeDto dto);
 }
