@@ -13,6 +13,14 @@ drop table MINE_CLASSI;
 drop table MINE_7QNA;
 drop table GUESTBOOK;
 drop table friend;
+drop table notification;
+
+CREATE TABLE notification(
+	seq int auto_increment primary key,
+	id varchar(100), 
+    minenotice int,
+    guestnotice int
+);
 
 
 CREATE TABLE friend(
