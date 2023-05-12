@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mul.cam.a.dto.MineAnswerDto;
 import mul.cam.a.dto.MineDto;
+import mul.cam.a.dto.NoticeDto;
 import mul.cam.a.util.NaverCloud;
 import mul.cam.a.service.MineService;
 import mul.cam.a.util.FileUtil;
@@ -262,6 +263,43 @@ public class MineController {
 		System.out.println("deleteanswer " + new Date());
 		
 		boolean b = service.deleteanswer(seq);
+		
+		if (!b) {
+			return "NO";
+		}
+		
+		return "YES";
+	}
+	
+	
+	
+	@PostMapping(value = "noticemine")
+	public int noticemine(String id){
+		System.out.println("noticemine " + new Date());
+		System.out.println("id: " + id);
+		
+		boolean b = service.checknotice(id);
+		
+		if(!b) {
+			service.insertnotice(id);
+		}
+		
+		int answer = service.answernum(id);
+		int notice = service.noticenum(id);
+		
+		return answer-notice;
+	}
+	
+	@PostMapping(value = "noticemineupdate")
+	public String noticemineupdate(NoticeDto dto){
+		System.out.println("noticemineupdate " + new Date());
+		System.out.println("dto: " + dto.toString());
+		
+		int answer = service.answernum(dto.getId());
+		
+		dto.setMinenotice(answer);
+		
+		boolean b = service.noticemineupdate(dto);
 		
 		if (!b) {
 			return "NO";
