@@ -10,15 +10,11 @@ public class QnaDto {
 	String q5;
 	String q6;
 	String q7;
-	String q8;
-	String q9;
-	String q10;
 	
 	public QnaDto() {
 	}
 
-	public QnaDto(String id, String q1, String q2, String q3, String q4, String q5, String q6, String q7, String q8,
-			String q9, String q10) {
+	public QnaDto(String id, String q1, String q2, String q3, String q4, String q5, String q6, String q7) {
 		super();
 		this.id = id;
 		this.q1 = q1;
@@ -28,9 +24,6 @@ public class QnaDto {
 		this.q5 = q5;
 		this.q6 = q6;
 		this.q7 = q7;
-		this.q8 = q8;
-		this.q9 = q9;
-		this.q10 = q10;
 	}
 
 	public String getId() {
@@ -97,29 +90,4 @@ public class QnaDto {
 		this.q7 = q7;
 	}
 
-	public String getQ8() {
-		return q8;
-	}
-
-	public void setQ8(String q8) {
-		this.q8 = q8;
-	}
-
-	public String getQ9() {
-		return q9;
-	}
-
-	public void setQ9(String q9) {
-		this.q9 = q9;
-	}
-
-	public String getQ10() {
-		return q10;
-	}
-
-	public void setQ10(String q10) {
-		this.q10 = q10;
-	}
-
-	
 }
