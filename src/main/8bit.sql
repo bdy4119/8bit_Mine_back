@@ -10,9 +10,17 @@ drop table report;
 drop table MINE_I;
 drop table BGM;
 drop table MINE_CLASSI;
-drop table MINE_10QNA;
+drop table MINE_7QNA;
 drop table GUESTBOOK;
 drop table friend;
+drop table notification;
+
+CREATE TABLE notification(
+	seq int auto_increment primary key,
+	id varchar(100), 
+    minenotice int,
+    guestnotice int
+);
 
 
 CREATE TABLE friend(
@@ -157,7 +165,7 @@ CLASSIFY VARCHAR(30) NOT NULL,
 REF INT
 );
 
-CREATE TABLE MINE_10QNA(
+CREATE TABLE MINE_7QNA(
 ID VARCHAR(100) PRIMARY KEY,
 Q1 VARCHAR(100),
 Q2 VARCHAR(100),
@@ -165,10 +173,7 @@ Q3 VARCHAR(100),
 Q4 VARCHAR(100),
 Q5 VARCHAR(100),
 Q6 VARCHAR(100),
-Q7 VARCHAR(100),
-Q8 VARCHAR(100),
-Q9 VARCHAR(100),
-Q10 VARCHAR(100)
+Q7 VARCHAR(100)
 );
 
 CREATE TABLE GUESTBOOK(

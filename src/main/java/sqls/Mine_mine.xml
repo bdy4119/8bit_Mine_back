@@ -75,5 +75,35 @@
 </delete>
 
 
+<select id="checknotice" parameterType="String" resultType="Integer">
+	select count(*)
+	from notification
+	where id=#{id}
+</select>
+
+<insert id="insertnotice" parameterType="String">
+	insert into notification(id, minenotice, guestnotice)
+	values(#{id}, 0, 0)
+</insert>
+
+<select id="answernum" parameterType="String" resultType="Integer">
+	select count(*)
+	from mine_answer
+	where mineid=#{id}
+</select>
+
+<select id="noticenum" parameterType="String" resultType="Integer">
+	select minenotice
+	from notification
+	where id=#{id}
+</select>
+
+<update id="noticemineupdate" parameterType="mul.cam.a.dto.NoticeDto">
+	update notification
+	set minenotice=#{minenotice}
+	where id=#{id}
+</update>
+
+
 
 </mapper>
