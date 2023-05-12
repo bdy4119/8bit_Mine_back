@@ -45,18 +45,18 @@
 
 <!-- 10문 10답 -->
 <insert id="i_add_qna" parameterType="mul.cam.a.dto.QnaDto">
-	INSERT INTO MINE_10QNA(ID, Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10)
-	VALUES(#{id}, #{q1}, #{q2}, #{q3}, #{q4}, #{q5}, #{q6}, #{q7}, #{q8}, #{q9}, #{q10})
+	INSERT INTO MINE_7QNA(ID, Q1, Q2, Q3, Q4, Q5, Q6, Q7)
+	VALUES(#{id}, #{q1}, #{q2}, #{q3}, #{q4}, #{q5}, #{q6}, #{q7})
 </insert>
 
 <select id="i_qna" parameterType="String" resultType="mul.cam.a.dto.QnaDto">
 	SELECT *
-	FROM MINE_10QNA
+	FROM MINE_7QNA
 	WHERE ID=#{id}
 </select>
 
 <delete id="i_del_qna" parameterType="String">
-	DELETE FROM MINE_10QNA
+	DELETE FROM MINE_7QNA
 	WHERE ID=#{id}
 </delete>
 </mapper>

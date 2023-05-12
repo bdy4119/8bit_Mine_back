@@ -30,7 +30,7 @@ public class APIS {
 		String clientSecret = APIKEY.book_Secret; //애플리케이션 클라이언트 시크릿
 
 
-		String apiURL = "https://openapi.naver.com/v1/search/book?query=" + search + "&start=" + (page * 10 + 1) + "&display=" + 10;    // JSON 결과
+		String apiURL = "https://openapi.naver.com/v1/search/book?query=" + search + "&start=" + (page * 5 + 1) + "&display=" + 5;    // JSON 결과
 
 		Map<String, String> requestHeaders = new HashMap<>();
 		requestHeaders.put("X-Naver-Client-Id", clientId);
