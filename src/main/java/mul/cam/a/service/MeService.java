@@ -44,6 +44,12 @@ public class MeService {
 	public void deleteTodo(int seq) {
 		dao.deleteTodo(seq);
 	}
+
+	//Todo-> 달력 뿌릴용
+	public List<TodoDto> getCalTodo(TodoParam param) {
+		return dao.getCalTodo(param);
+	}
+	
 	
 	public List<DiaryDto> getDiaryList(MeParam param) {
 		return dao.getDiaryList(param);
@@ -68,7 +74,7 @@ public class MeService {
 	}
 	
 	
-	//전체 보내주기 -> 달력 뿌릴용
+	//다이어리 -> 달력 뿌릴용
 	public List<DiaryDto> getDiaryCalList(MeParam param) {
 		return dao.getDiaryCalList(param);
 	}

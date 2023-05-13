@@ -31,6 +31,9 @@ public interface MeDao {
 	//todo글의 총수
 	int getAllTodo(TodoParam param);
 	
+	//todo리스트 -> 전체 보내주기(달력 뿌릴용)
+	List<TodoDto> getCalTodo(TodoParam param);
+	
 	
 	
 	//diary리스트 -> 오늘이랑 같은 날짜만 보내주기
