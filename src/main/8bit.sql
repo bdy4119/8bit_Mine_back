@@ -22,7 +22,6 @@ CREATE TABLE notification(
     guestnotice int
 );
 
-
 CREATE TABLE friend(
 	seq int auto_increment primary key,
 	id varchar(100), 
@@ -99,8 +98,8 @@ create table mine_mine(
     seq int auto_increment primary key,
     id varchar(100) not null, 
     position int not null,
-    filename varchar(50) not null,	-- 원본 파일명
-    newfilename varchar(50) not null, -- 업로드 파일명
+    filename varchar(500) not null,	-- 원본 파일명
+    newfilename varchar(500) not null, -- 업로드 파일명
     imgtext varchar(500) not null
 );
 
@@ -109,6 +108,9 @@ create table mine_answer(
     seq int auto_increment primary key,
     userid varchar(100) not null, -- 작성자
     mineid varchar(100) not null, -- 마인 주인
+    question1 varchar(500) not null,
+    question2 varchar(500) not null,
+	question3 varchar(500) not null,    
     answer1 varchar(500) not null,
     answer2 varchar(500) not null,
     answer3 varchar(500) not null
@@ -165,7 +167,7 @@ CLASSIFY VARCHAR(30) NOT NULL,
 REF INT
 );
 
-CREATE TABLE MINE_7QNA(
+CREATE TABLE MINE_10QNA(
 ID VARCHAR(100) PRIMARY KEY,
 Q1 VARCHAR(100),
 Q2 VARCHAR(100),
@@ -173,7 +175,10 @@ Q3 VARCHAR(100),
 Q4 VARCHAR(100),
 Q5 VARCHAR(100),
 Q6 VARCHAR(100),
-Q7 VARCHAR(100)
+Q7 VARCHAR(100),
+Q8 VARCHAR(100),
+Q9 VARCHAR(100),
+Q10 VARCHAR(100)
 );
 
 CREATE TABLE GUESTBOOK(
