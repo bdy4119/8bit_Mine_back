@@ -109,6 +109,36 @@ public class MeController {
 	}
 	
 	
+	//todo리스트 불러오기(달력 뿌릴용)
+	@GetMapping(value = "getCalTodo")
+	public Map<String, Object> getCalTodo(TodoParam param) {
+		System.out.println("MeController getTodoList " + new Date());
+
+		// 글의 시작과 끝
+		int pn = param.getPageNumber();  // 0 1 2 3 4
+		int start = 1 + (pn * 10);	// 1  11
+		int end = (pn + 1) * 10;	// 10 20 
+					
+		param.setStart(start);
+		param.setEnd(end);
+					
+		List<TodoDto> list = service.getCalTodo(param);
+		int len = service.getAllTodo(param);
+					
+		System.out.println(list);
+		//	System.out.println(len);
+					
+		Map<String,Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("cnt", len); // 페이지수x -> 글의 총수
+					
+		return map;		
+	}
+	
+	
+	
+	
+	
 	//diary리스트 불러오기
 	@GetMapping(value = "diaryList")
 	public Map<String, Object> getDiaryList(MeParam param) {
@@ -230,7 +260,6 @@ public class MeController {
 			//파일이 없을 경우 아래 코드들 실행되면 안됨
 			String filename = uploadFile.getOriginalFilename();
 			String filepath = Privatepath.mcPath + filename;	//실제경로 + 원본파일명	
-				
 			System.out.println(filepath);
 				
 			try {
