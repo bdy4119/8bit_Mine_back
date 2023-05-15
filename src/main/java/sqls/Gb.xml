@@ -4,17 +4,17 @@
 <mapper namespace="mul.cam.a.dao.GbDao">
 
 <insert id="gb_add" parameterType="mul.cam.a.dto.GbDto">
-	INSERT INTO GUESTBOOK(TOID, TONAME, FROMID, FROMNAME, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE)
-	VALUES(#{toid}, #{toname}, #{fromid}, #{fromname}, #{comment}, (SELECT IFNULL(MAX(REF),0)+1 FROM GUESTBOOK G), 0, #{isvoice}, #{filename}, now())
+	INSERT INTO GUESTBOOK(TOID, TONAME, FROMID, FROMNAME, PROFPIC, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE)
+	VALUES(#{toid}, #{toname}, #{fromid}, #{fromname}, #{profpic},#{comment}, (SELECT IFNULL(MAX(REF),0)+1 FROM GUESTBOOK G), 0, #{isvoice}, #{filename}, now())
 </insert>
 
 
 <!-- 주인한테 보이는 방명록 -->
 <select id="gb_list" parameterType="mul.cam.a.dto.GbDto" resultType="mul.cam.a.dto.GbDto">
-	SELECT RNUM, TOID, TONAME, FROMID, FROMNAME, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE
+	SELECT RNUM, TOID, TONAME, FROMID, FROMNAME, PROFPIC, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE
 	FROM (SELECT ROW_NUMBER()OVER(ORDER BY REGDATE DESC)AS RNUM,
-			TOID, TONAME, FROMID, FROMNAME, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE FROM GUESTBOOK
-		WHERE 1=1 and TOID=#{toid} ORDER BY REGDATE DESC) a
+			TOID, TONAME, FROMID, FROMNAME, PROFPIC, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE FROM GUESTBOOK
+		WHERE TOID=#{toid} ORDER BY REGDATE DESC) a
 	WHERE RNUM BETWEEN ${start} AND ${end}
 </select>
 

@@ -13,7 +13,9 @@ public interface FriendDao {
 	
 	int acceptfriend(FriendDto dto);
 	
-	List<FriendDto> friendlist(String id);
+	List<FriendDto> friendlist(FriendDto dto);
 
+	int friendCount(String id);
+	
 	int deletefriend(int seq);
 }

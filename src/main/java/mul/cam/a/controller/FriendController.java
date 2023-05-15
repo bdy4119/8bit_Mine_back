@@ -32,10 +32,16 @@ public class FriendController {
 	}
 	
 	@PostMapping(value = "friendlist")
-	public List<FriendDto> friendlist(String id){
+	public List<FriendDto> friendlist(FriendDto dto){
 		System.out.println("friendlist " + new Date());
 		
-		return service.friendlist(id);
+		return service.friendlist(dto);
+	}
+	
+	@PostMapping(value = "friendCount")
+	public int friendCount(String id) {
+		
+		return service.friendCount(id);
 	}
 	
 	@PostMapping(value = "deletefriend")
