@@ -16,7 +16,10 @@ public interface GbDao {
 	int gb_list_c(String toid);
 	
 	List<GbDto> gb_list(GbDto dto);
+	List<GbDto> vi_list(GbDto dto);
 	List<GbDto> gb_visit(GbDto dto);
+	int gb_visit_c(GbDto dto);
+	
 	GbDto gb_detail(int seq);
 	
 	int gb_upd(GbDto dto);

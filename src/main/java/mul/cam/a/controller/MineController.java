@@ -315,10 +315,6 @@ public class MineController {
 		
 		boolean b = service.checknotice(id);
 		
-		if(!b) {
-			service.insertnotice(id);
-		}
-		
 		int guest = service.guestnum(id);
 		int notice = service.noticebooknum(id);
 		

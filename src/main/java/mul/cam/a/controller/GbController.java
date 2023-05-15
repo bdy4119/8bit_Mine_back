@@ -37,6 +37,17 @@ public class GbController {
 		return service.gb_list(dto);
 	}
 	
+	@GetMapping(value = "vi_list")
+	public List<GbDto> vi_list(GbDto dto) {
+		System.out.println("GbController gb_list() : " + new Date());
+		
+		System.out.println(dto.getToid());
+		
+		return service.gb_list(dto);
+	}
+	
+	
+	
 	@GetMapping(value = "gb_list_c")
 	public int gb_list_c(String toid) {
 		System.out.println("GbController gb_list_c() : " + new Date());
@@ -49,6 +60,13 @@ public class GbController {
 		System.out.println("GbController gb_visit() : " + new Date());
 
 		return service.gb_visit(dto);
+	}
+	
+	@GetMapping(value = "gb_visit_c")
+	public int gb_visit_c(GbDto dto) {
+		System.out.println("GbController gb_visit_c() : " + new Date());
+		
+		return service.gb_visit_c(dto);
 	}
 	
 	@GetMapping(value = "gb_upd")
@@ -64,6 +82,8 @@ public class GbController {
 	
 	@GetMapping(value = "gb_del")
 	public String gb_del(int seq) {
+		
+		System.out.println("GbController del() : " + new Date());
 
 		if(service.gb_del(seq)) {
 			return "gb_del_OK";

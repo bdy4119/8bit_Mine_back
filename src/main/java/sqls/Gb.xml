@@ -18,15 +18,29 @@
 	WHERE RNUM BETWEEN ${start} AND ${end}
 </select>
 
+<select id="vi_list" parameterType="mul.cam.a.dto.GbDto" resultType="mul.cam.a.dto.GbDto">
+	SELECT RNUM, TOID, TONAME, FROMID, FROMNAME, PROFPIC, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE
+	FROM (SELECT ROW_NUMBER()OVER(ORDER BY REGDATE DESC)AS RNUM,
+			TOID, TONAME, FROMID, FROMNAME, PROFPIC, COMMENT, REF, STEP, ISVOICE, FILENAME, REGDATE FROM GUESTBOOK
+		WHERE TOID=#{toid} and FROMID=#{fromid} ORDER BY REGDATE DESC) a
+	WHERE RNUM BETWEEN ${start} AND ${end}
+</select>
+
 <select id="gb_list_c" parameterType="String" resultType="Integer">
 	SELECT COUNT(*)
 	FROM GUESTBOOK
-	WHERE TOID=#{toid};
+	WHERE TOID=#{toid}
 </select>
 
 <!-- 내가 작성한 방명록 -->
 <select id="gb_visit" parameterType="mul.cam.a.dto.GbDto" resultType="mul.cam.a.dto.GbDto">
 	SELECT *
+	FROM GUESTBOOK
+	WHERE TOID=#{toid} and FROMID=#{fromid}
+</select>
+
+<select id="gb_visit_c" parameterType="String" resultType="Integer">
+	SELECT COUNT(*)
 	FROM GUESTBOOK
 	WHERE TOID=#{toid} and FROMID=#{fromid}
 </select>
