@@ -70,6 +70,13 @@
 		 </if>
 	</select>
 	
+	<!-- todo 달력 뿌릴용/ 중복되는 날짜는 하나만 불러오기-->
+	<select id="getCalTodo" parameterType="mul.cam.a.dto.TodoParam"
+		resultType="mul.cam.a.dto.TodoDto">
+		select seq, id, title, content, rdate, wdate, del
+		from todo
+		where seq in (select max(seq) from todo group by rdate)
+	</select>
 	
 	
 	
@@ -143,23 +150,9 @@
 	<!-- calendar전체리스트 불러오기 -> 달력 뿌릴용-->
 	<select id="getDiaryCalList" parameterType="mul.cam.a.dto.MeParam"
 		resultType="mul.cam.a.dto.DiaryDto">
-
 		select seq, id, title, content, rdate, wdate, del
-		from
-			(select row_number()over(order by rdate desc) as rnum,
-				seq, id, title, content, rdate, wdate, del
-			 from calendar
-			 where 1=1 
-			 <if test="choice != null and choice != '' and search != null and search != '' ">
-			 	<if test="choice == 'title'">
-			 		and title like concat('%', #{search}, '%') and del=0
-			 	</if>
-			 	<if test="choice == 'content'">
-			 		and content like concat('%', #{search}, '%') and del=0
-			 	</if>
-			 </if>	 
-			  order by rdate asc ) a
-			  where rnum between ${start} and ${end}
+		from calendar
+		where seq in (select max(seq) from calendar group by rdate)
 	</select>
 	
 	

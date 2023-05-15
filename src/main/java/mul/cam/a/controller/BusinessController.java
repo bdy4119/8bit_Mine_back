@@ -168,7 +168,7 @@ public class BusinessController {
 			//파일이 없을 경우 아래 코드들 실행되면 안됨
 			String filename = uploadFile.getOriginalFilename();
 			String filepath = Privatepath.bcPath + filename;	//실제경로 + 원본파일명	
-			System.out.println(filepath);
+			
 			
 			try {
 				BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
