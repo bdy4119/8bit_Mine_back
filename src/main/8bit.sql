@@ -25,7 +25,9 @@ CREATE TABLE notification(
 CREATE TABLE friend(
 	seq int auto_increment primary key,
 	id varchar(100), 
-    friendid varchar(100)
+    friendid varchar(100),
+    friendname varchar(100),
+    regdate timestamp
 );
 
 
@@ -184,6 +186,7 @@ TOID VARCHAR(100),
 TONAME VARCHAR(50),
 FROMID VARCHAR(100),
 FROMNAME VARCHAR(50),
+PROFPIC VARCHAR(50),
 COMMENT VARCHAR(50),
 REF INT,
 STEP INT,

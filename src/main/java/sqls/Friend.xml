@@ -4,12 +4,20 @@
 <mapper namespace="mul.cam.a.dao.FriendDao">
 
 <insert id="acceptfriend" parameterType="mul.cam.a.dto.FriendDto">
-	insert into friend(id, friendid)
-	values(#{id}, #{friendid})
+	insert into friend(id, friendid, friendname, regdate)
+	values(#{id}, #{friendid}, #{friendname}, now())
 </insert>
 
-<select id="friendlist" parameterType="String" resultType="mul.cam.a.dto.FriendDto">
-	select * from friend
+<select id="friendlist" parameterType="mul.cam.a.dto.FriendDto" resultType="mul.cam.a.dto.FriendDto">
+	select rnum, seq, id, friendid, friendname, regdate
+	from (select row_number()over(order by regdate desc) as rnum, seq, id, friendid, friendname, regdate from friend
+		where id=#{id} order by regdate desc) a
+	where rnum between ${start} and ${end}
+</select>
+
+<select id="friendCount" parameterType="String" resultType="Integer">
+	select count(*)
+	from friend
 	where id=#{id}
 </select>
 

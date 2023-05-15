@@ -23,9 +23,15 @@ public class FriendService {
 		return n>0?true:false;
 	}
 	
-	public List<FriendDto> friendlist(String id) {
+	public List<FriendDto> friendlist(FriendDto dto) {
 		System.out.println("friendlist Service" + new Date());
-		return dao.friendlist(id);
+		
+		return dao.friendlist(dto);
+	}
+	
+	public int friendCount(String id) {
+		
+		return dao.friendCount(id);
 	}
 	
 	public boolean deletefriend(int seq) {
