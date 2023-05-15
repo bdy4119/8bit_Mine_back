@@ -23,6 +23,7 @@
 			 </if>	  -->
 			 order by rdate desc) a
 		<!-- where rnum between ${start} and ${end}-->
+		where id=#{id}
 	</select>
 	
 	
@@ -75,7 +76,7 @@
 		resultType="mul.cam.a.dto.TodoDto">
 		select seq, id, title, content, rdate, wdate, del
 		from todo
-		where seq in (select max(seq) from todo group by rdate)
+		where seq in (select max(seq) from todo group by rdate) and id=#{id}
 	</select>
 	
 	
@@ -103,7 +104,7 @@
 			 	</if>
 			 </if>	 
 			  order by rdate asc ) a
-			  where rnum between ${start} and ${end}
+			  where rnum between ${start} and ${end} and id=#{id}
 <!-- 				and rdate = DATE_FORMAT(CURDATE(), "%Y-%m-%d") -->
 	</select>
 	
@@ -152,7 +153,7 @@
 		resultType="mul.cam.a.dto.DiaryDto">
 		select seq, id, title, content, rdate, wdate, del
 		from calendar
-		where seq in (select max(seq) from calendar group by rdate)
+		where seq in (select max(seq) from calendar group by rdate) and id=#{id}
 	</select>
 	
 	

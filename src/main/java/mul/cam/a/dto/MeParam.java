@@ -11,16 +11,19 @@ public class MeParam implements Serializable{
 	private int start;
 	private int end;
 	
+	private String id;
+	
 	public MeParam() {
 	}
 
-	public MeParam(String choice, String search, int pageNumber, int start, int end) {
+	public MeParam(String choice, String search, int pageNumber, int start, int end, String id) {
 		super();
 		this.choice = choice;
 		this.search = search;
 		this.pageNumber = pageNumber;
 		this.start = start;
 		this.end = end;
+		this.id = id;
 	}
 
 	public String getChoice() {
@@ -63,6 +66,15 @@ public class MeParam implements Serializable{
 		this.end = end;
 	}
 
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "MeParam [choice=" + choice + ", search=" + search + ", pageNumber=" + pageNumber + ", start=" + start
