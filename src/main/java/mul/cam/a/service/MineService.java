@@ -111,9 +111,9 @@ public class MineService {
 		return dao.answernum(id);
 	}
 	
-	public int noticenum(String id) {
+	public int noticeminenum(String id) {
 
-		return dao.noticenum(id);
+		return dao.noticeminenum(id);
 	}
 	
 	public boolean noticemineupdate(NoticeDto dto) {
@@ -122,6 +122,21 @@ public class MineService {
 		return n>0?true:false;
 	}
 	
+	public int guestnum(String id) {
+
+		return dao.guestnum(id);
+	}
+	
+	public int noticebooknum(String id) {
+
+		return dao.noticebooknum(id);
+	}
+	
+	public boolean noticebookupdate(NoticeDto dto) {
+		int n = dao.noticebookupdate(dto);
+		
+		return n>0?true:false;
+	}
 }
 
 

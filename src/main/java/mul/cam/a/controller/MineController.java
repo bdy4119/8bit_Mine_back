@@ -285,7 +285,7 @@ public class MineController {
 		}
 		
 		int answer = service.answernum(id);
-		int notice = service.noticenum(id);
+		int notice = service.noticeminenum(id);
 		
 		return answer-notice;
 	}
@@ -300,6 +300,41 @@ public class MineController {
 		dto.setMinenotice(answer);
 		
 		boolean b = service.noticemineupdate(dto);
+		
+		if (!b) {
+			return "NO";
+		}
+		
+		return "YES";
+	}
+	
+	@PostMapping(value = "noticebook")
+	public int noticebook(String id){
+		System.out.println("noticebook " + new Date());
+		System.out.println("id: " + id);
+		
+		boolean b = service.checknotice(id);
+		
+		if(!b) {
+			service.insertnotice(id);
+		}
+		
+		int guest = service.guestnum(id);
+		int notice = service.noticebooknum(id);
+		
+		return guest-notice;
+	}
+	
+	@PostMapping(value = "noticebookupdate")
+	public String noticebookupdate(NoticeDto dto){
+		System.out.println("noticebookupdate " + new Date());
+		System.out.println("dto: " + dto.toString());
+		
+		int guest = service.guestnum(dto.getId());
+		
+		dto.setGuestnotice(guest);
+		
+		boolean b = service.noticebookupdate(dto);
 		
 		if (!b) {
 			return "NO";

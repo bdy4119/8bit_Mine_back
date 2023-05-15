@@ -48,7 +48,15 @@ public interface MineDao {
 	
 	int answernum(String id);
 	
-	int noticenum(String id);
+	int noticeminenum(String id);
 	
 	int noticemineupdate(NoticeDto dto);
+	
+	int guestnum(String id);
+	
+	int noticebooknum(String id);
+	
+	int noticebookupdate(NoticeDto dto);
+	
+	
 }
