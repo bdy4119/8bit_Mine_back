@@ -59,8 +59,8 @@
 </update>
 
 <insert id="updateanswer" parameterType="mul.cam.a.dto.MineAnswerDto">
-	insert into mine_answer(userid, mineid, answer1, answer2, answer3)
-	values(#{userid}, #{mineid}, #{answer1}, #{answer2}, #{answer3})
+	insert into mine_answer(userid, mineid, question1, question2, question3, answer1, answer2, answer3)
+	values(#{userid}, #{mineid}, #{question1}, #{question2}, #{question3}, #{answer1}, #{answer2}, #{answer3})
 </insert>
 
 <select id="answerlist" parameterType="String" resultType="mul.cam.a.dto.MineAnswerDto">
@@ -92,7 +92,7 @@
 	where mineid=#{id}
 </select>
 
-<select id="noticenum" parameterType="String" resultType="Integer">
+<select id="noticeminenum" parameterType="String" resultType="Integer">
 	select minenotice
 	from notification
 	where id=#{id}
@@ -103,6 +103,25 @@
 	set minenotice=#{minenotice}
 	where id=#{id}
 </update>
+
+<select id="guestnum" parameterType="String" resultType="Integer">
+	select count(*)
+	from GUESTBOOK
+	where TOID=#{id}
+</select>
+
+<select id="noticebooknum" parameterType="String" resultType="Integer">
+	select guestnotice
+	from notification
+	where id=#{id}
+</select>
+
+<update id="noticebookupdate" parameterType="mul.cam.a.dto.NoticeDto">
+	update notification
+	set guestnotice=#{guestnotice}
+	where id=#{id}
+</update>
+
 
 
 
