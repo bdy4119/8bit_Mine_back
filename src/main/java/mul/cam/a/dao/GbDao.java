@@ -13,8 +13,9 @@ import mul.cam.a.dto.GbDto;
 public interface GbDao {
 	
 	int gb_add(GbDto dto);
+	int gb_list_c(String toid);
 	
-	List<GbDto> gb_list(String id);
+	List<GbDto> gb_list(GbDto dto);
 	List<GbDto> gb_visit(GbDto dto);
 	GbDto gb_detail(int seq);
 	
