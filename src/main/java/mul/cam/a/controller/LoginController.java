@@ -599,6 +599,12 @@ public class LoginController {
 		
 		return map;
 	}
+	
+	@GetMapping(value = "/getItems")
+	public LoginDto getItems(String email) {
+		
+		return service.getDto(email);
+	}
 }
 
 

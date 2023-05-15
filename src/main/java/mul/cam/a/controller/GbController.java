@@ -29,10 +29,19 @@ public class GbController {
 	GbService service;
 
 	@GetMapping(value = "gb_list")
-	public List<GbDto> gb_list(String id) {
+	public List<GbDto> gb_list(GbDto dto) {
 		System.out.println("GbController gb_list() : " + new Date());
-
-		return service.gb_list(id);
+		
+		System.out.println(dto.getToid());
+		
+		return service.gb_list(dto);
+	}
+	
+	@GetMapping(value = "gb_list_c")
+	public int gb_list_c(String toid) {
+		System.out.println("GbController gb_list_c() : " + new Date());
+		
+		return service.gb_list_c(toid);
 	}
 	
 	@GetMapping(value = "gb_visit")
