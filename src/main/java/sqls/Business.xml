@@ -55,16 +55,16 @@
 	<!-- delete -->
 	<update id="backDel">
 		delete from businesscardBack
-		where seq=#{seq}
+		where seq=#{seq} and id=#{id}
 	</update>
 	
 	
 	<!-- update -->
 	<update id="backUpdate" parameterType="mul.cam.a.dto.BusinessBackDto">
 		update businesscardBack
-		set id=#{id}, historyDate=#{historyDate}, historyTitle=#{historyTitle},
+		set historyDate=#{historyDate}, historyTitle=#{historyTitle},
 			historyContent=#{historyContent}, historyUrl=#{historyUrl}
-		where seq=#{seq}
+		where seq=#{seq} and id=#{id}
 	</update>
 	
 	<!-- 상세보기 -->
