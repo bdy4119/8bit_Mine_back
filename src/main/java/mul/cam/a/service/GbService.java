@@ -1,5 +1,6 @@
 package mul.cam.a.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,18 @@ public class GbService {
 		return dao.gb_list(dto);
 	}
 	
+	public List<GbDto> vi_list(GbDto dto) {
+		return dao.vi_list(dto);
+	}
+	
 	public List<GbDto> gb_visit(GbDto dto) {
 		return dao.gb_visit(dto);
 	}
+	
+	public int gb_visit_c(GbDto dto) {
+		return dao.gb_visit_c(dto);
+	}
+	
 	
 	public GbDto gb_detail(int seq) {
 		return dao.gb_detail(seq);
@@ -42,6 +52,8 @@ public class GbService {
 	}
 	
 	public boolean gb_del(int seq) {
+		System.out.println("serv del() : " + new Date());
+		
 		return dao.gb_del(seq)>0?true:false;
 	}
 }
