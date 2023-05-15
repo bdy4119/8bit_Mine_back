@@ -147,6 +147,7 @@ public class APIS {
 			System.out.println(e);
 		}
 
+		System.out.println(response.toString());
 		return response.toString();
 	}
 
