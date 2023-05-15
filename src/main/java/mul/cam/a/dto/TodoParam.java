@@ -11,16 +11,19 @@ public class TodoParam implements Serializable{
 	private int start;
 	private int end;
 	
+	private String id;
+	
 	public TodoParam() {
 	}
 
-	public TodoParam(String choice, String search, int pageNumber, int start, int end) {
+	public TodoParam(String choice, String search, int pageNumber, int start, int end, String id) {
 		super();
 		this.choice = choice;
 		this.search = search;
 		this.pageNumber = pageNumber;
 		this.start = start;
 		this.end = end;
+		this.id = id;
 	}
 
 	public String getChoice() {
@@ -61,6 +64,14 @@ public class TodoParam implements Serializable{
 
 	public void setEnd(int end) {
 		this.end = end;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Override
