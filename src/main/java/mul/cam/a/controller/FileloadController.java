@@ -96,8 +96,28 @@ public class FileloadController {
 			return "del_File_NO";
 		}
 	}
+	// 파일 수정
+	@PostMapping("/updateFile")
+	public String updateFile(FileloadDto dto, @RequestParam("fileLoad") MultipartFile fileLoad, HttpServletRequest req) throws Exception{
+	
+		System.out.println("수정"+dto+fileLoad);
+		// req.getServletContext() 웹경로
+		String path = req.getServletContext().getRealPath("/upload");
 
+		// 원본파일명.
+		String filename = fileLoad.getOriginalFilename();
+		String newFileName = FileUtil.getNewFileName(filename);
+		dto.setMfFilename(newFileName);
 
+		String filepath = "/upload/" + newFileName;
+		dto.setMfNFilename(filepath);
+
+		File file = new File(path + "/" + newFileName);
+		FileUtils.writeByteArrayToFile(file, fileLoad.getBytes());
+
+		return service.updateFile(dto) > 0 ? "파일 수정 완료" : "실패";
+		
+		}
 
 
 
@@ -152,4 +172,10 @@ public class FileloadController {
 	}
 
 
+	
+	
+	
+	
+	
+	
 } // end of FileloadController

@@ -71,8 +71,8 @@
 <!-- 파일수정 -->
 <update id="updateFile" parameterType="mul.cam.a.dto.FileloadDto">
 	UPDATE MY_FILELOAD
-	SET MF_TITLE=#{mfTitle},MF_TITLE=#{mfTitle}, MF_CATEGORY=#{mfCategory}, mfMemo=#{mfMemo} 
-	MF_FILENAME=#{filename}, MF_NEWFILENAME=#{mfNFilename}, mfRegdate=now()
+	SET MF_TITLE=#{mfTitle}, MF_CATEGORY=#{mfCategory}, MF_MEMO=#{mfMemo}, 
+	MF_FILENAME=#{mfFilename}, MF_NEWFILENAME=#{mfNFilename}, MF_REGDATE=now()
 	WHERE MF_SEQ=#{mfSeq}
 </update>
 
