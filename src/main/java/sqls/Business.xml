@@ -8,6 +8,7 @@
 										resultType="mul.cam.a.dto.BusinessDto">
 		select seq, id, thumbnail, name, email, url, wdate, phoneNum, introduce
 		from businesscard
+		where email=#{email}
 	</select>
 	
 	<!-- 명함 상세보기 -->
@@ -47,8 +48,9 @@
 	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 명함 뒷면 start ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 	<select id="businesscardB" parameterType="mul.cam.a.dto.BusinessBackDto"
 										resultType="mul.cam.a.dto.BusinessBackDto">
-		select seq, id, historyDate, historyTitle, historyContent, historyUrl, wdate
+		select seq, historyDate, historyTitle, historyContent, historyUrl, wdate
 		from businesscardBack
+		where id=#{id}
 		order by historyDate desc
 	</select>
 	
