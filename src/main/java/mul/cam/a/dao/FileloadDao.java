@@ -26,4 +26,5 @@ public interface FileloadDao {
 
 	int deleteFile(int mfSeq);// 파일 삭제
 	
+	int updateFile(FileloadDto dto); // 파일 수정
 }

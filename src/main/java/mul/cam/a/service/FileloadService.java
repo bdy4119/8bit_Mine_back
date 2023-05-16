@@ -39,6 +39,13 @@ public class FileloadService {
 		return dao.deleteFile(mfSeq);
 	}
 	
+	public int updateFile(FileloadDto dto) {
+		return dao.updateFile(dto);
+	}
+	
+	
+	
+	
 	// file detail
 	public FileloadDto fileDetail(int mfSeq) {
 		return dao.fileDetail(mfSeq);
