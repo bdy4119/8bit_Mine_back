@@ -134,17 +134,6 @@ create table user(
     address varchar(100)
 );
 
-create table report(
-seq int primary key auto_increment,
-informant varchar(20) not null,
-suspect varchar(20) not null,
-report_cause varchar(100) not null,
-report_content varchar(50) not null,
-result varchar(50) default "choose",
-report_date timestamp not null,
-report_state varchar(50) default "checking"
-);
-
 CREATE TABLE MINE_I(
 SEQ INT AUTO_INCREMENT PRIMARY KEY,
 ID VARCHAR(100) NOT NULL,
