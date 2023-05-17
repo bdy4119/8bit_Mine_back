@@ -6,7 +6,6 @@ drop table businesscardBack;
 drop table mine_mine;
 drop table mine_answer;
 drop table user;
-drop table report;
 drop table MINE_I;
 drop table BGM;
 drop table MINE_CLASSI;
