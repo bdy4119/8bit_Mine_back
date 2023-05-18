@@ -53,4 +53,6 @@ public interface MeDao {
 
 	//diary리스트 -> 전체 보내주기(달력 뿌릴용)
 	List<DiaryDto> getDiaryCalList(MeParam param);
+	
+	List<TodoDto> forMainTodo(TodoDto dto);
 }

@@ -155,5 +155,12 @@
 		where seq in (select max(seq) from calendar group by rdate) and id=#{id}
 	</select>
 	
+	<select id="forMainTodo" parameterType="mul.cam.a.dto.TodoDto" resultType="mul.cam.a.dto.TodoDto">
+		select rnum, seq, id, title, content, rdate, wdate, del
+		from (select row_number()over(order by seq asc)as rnum, seq,
+		id, title, content, rdate, wdate, del from todo
+		where id=#{id} and rdate=#{rdate} order by seq asc) a
+		where rnum between 1 and 2
+	</select>
 	
 </mapper>

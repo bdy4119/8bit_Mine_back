@@ -78,6 +78,10 @@ public class MeService {
 	public List<DiaryDto> getDiaryCalList(MeParam param) {
 		return dao.getDiaryCalList(param);
 	}
+
+	public List<TodoDto> forMainTodo(TodoDto dto){
+		return dao.forMainTodo(dto);
+	}
 	
 }
 
