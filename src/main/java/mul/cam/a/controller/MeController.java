@@ -241,7 +241,12 @@ public class MeController {
 		return json;
 	}
 	
-	
+	@GetMapping(value="forMainTodo")
+	public List<TodoDto> forMainTodo(TodoDto dto) {
+		System.out.println("forMainTodo" + new Date());
+		System.out.println(service.forMainTodo(dto).toString());
+		return service.forMainTodo(dto);
+	}
 	
 	
 	//upload
